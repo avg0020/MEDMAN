@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 
@@ -17,8 +19,14 @@ public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Color grisFondo = new Color(240, 240, 240);
-	private Color naranja = new Color(255,127,39);
+	
+	//Colores
+	private Color gris = new Color(240, 240, 240);
+	private Color naranja_claro = new Color(255, 127, 39);
+	private Color naranja_oscuro = new Color(236, 118, 0);
+	private Color rojo_claro = new Color(237,28,36);
+	private Color rojo_oscuro = new Color(206,0,0);
+
 	/**
 	 * Launch the application.
 	 */
@@ -43,40 +51,103 @@ public class Inicio extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 960, 760);
 		contentPane = new JPanel();
-		contentPane.setBackground(grisFondo);
+		contentPane.setBackground(gris);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		setContentPane(contentPane);
-		
-		
+
 		// Titulo de la pantalla
 		JLabel lblTitulo = new JLabel();
 		lblTitulo.setBounds(275, 64, 393, 87);
 		lblTitulo.setIcon(new ImageIcon(getClass().getResource("/resources/titulo.png")));
-		
+
 		contentPane.add(lblTitulo);
-		
+
 		// Panel del menu Inicio
 		JPanel panelMenu = new JPanel();
 		panelMenu.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelMenu.setBounds(275, 210, 393, 410);
-		panelMenu.setBackground(grisFondo);
+		panelMenu.setBackground(gris);
 		panelMenu.setOpaque(true);
 		panelMenu.setLayout(null);
-		
+
 		contentPane.add(panelMenu);
-		
-		
-		//Boton iniciar partida
-		JButton btnInitPartida = new JButton("Single Player");
-		btnInitPartida.setBackground(naranja);
-		btnInitPartida.setBounds(100, 25, 200, 30);
-		btnInitPartida.setBorderPainted(false);
-		btnInitPartida.setFont(new Font("DejaVu Sans", Font.BOLD, 19));
-		
-		panelMenu.add(btnInitPartida);
+
+		// Botón partida un jugador
+		JButton btnInit1Player = new JButton("1 Jugador");
+		btnInit1Player.setBackground(naranja_claro);
+		btnInit1Player.setBounds(100, 25, 200, 30);
+		btnInit1Player.setBorderPainted(false);
+		btnInit1Player.setFont(new Font("DejaVu Sans", Font.BOLD, 19));
+		btnInit1Player.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnInit1Player.setBackground(naranja_claro);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnInit1Player.setBackground(naranja_oscuro);
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		panelMenu.add(btnInit1Player);
+
+		// Boton iniciar partida
+		JButton btnInit2Players = new JButton("2 Jugadores");
+		btnInit2Players.setBackground(rojo_claro);
+		btnInit2Players.setBounds(100, 80, 200, 30);
+		btnInit2Players.setBorderPainted(false);
+		btnInit2Players.setFont(new Font("DejaVu Sans", Font.BOLD, 19));
+		btnInit2Players.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnInit2Players.setBackground(rojo_claro);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnInit2Players.setBackground(rojo_oscuro);
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		panelMenu.add(btnInit2Players);
 	}
 }
