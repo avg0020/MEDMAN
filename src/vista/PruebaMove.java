@@ -19,6 +19,7 @@ public class PruebaMove extends JFrame implements KeyListener{
 	private JLabel lblMedman = new JLabel();
 	private JLabel lblMuro = new JLabel();
 	private JLabel lblMuro2 = new JLabel();
+	private JLabel lblMapa = new JLabel();
 	
 	private Buffer buffer = new Buffer(lblMedman);
 	private Medman medman = new Medman(buffer);
@@ -46,7 +47,7 @@ public class PruebaMove extends JFrame implements KeyListener{
 	 */
 	public PruebaMove() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 800);
+		setBounds(100, 100, 1200, 900);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		addKeyListener(this);
@@ -58,49 +59,47 @@ public class PruebaMove extends JFrame implements KeyListener{
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setLayout(null);
-		panel.setBounds(100, 100, 600, 600);
+		panel.setBounds(200, 200, 860, 420);
 		contentPane.add(panel);
 		
 		
-		lblMedman.setBounds(0, 0, 100, 100);
+		lblMedman.setBounds(0, 0, 20, 20);
 		lblMedman.setIcon(new ImageIcon(getClass().getResource("/resources/medman.png")));
 		panel.add(lblMedman);
 		
-		lblMuro.setBounds(200, 200, 300, 100);
+		lblMuro.setBounds(200, 200, 15, 15);
 		lblMuro.setBackground(Color.BLUE);
 		lblMuro.setOpaque(true);
-		panel.add(lblMuro);
+		//panel.add(lblMuro);
 		
 		lblMuro2.setBounds(400, 300, 100, 200);
 		lblMuro2.setBackground(Color.RED);
 		lblMuro2.setOpaque(true);
-		panel.add(lblMuro2);
+		//panel.add(lblMuro2);
 		
-		
+		lblMapa.setBounds(0, 0, 860, 420);
+		lblMapa.setIcon(new ImageIcon(getClass().getResource("/resources/mapa.jpg")));
+		panel.add(lblMapa);
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		switch(e.getKeyChar()) {
 		case 'a': 
-			buffer.setXDirection(-100);
+			buffer.setXDirection(-20);
 			buffer.setYDirection(0);
-			//lblMedman.setLocation(lblMedman.getX()-10, lblMedman.getY());
 			break;
 		case 's':
 			buffer.setXDirection(0);
-			buffer.setYDirection(+100);
-			//lblMedman.setLocation(lblMedman.getX(), lblMedman.getY()-10);
+			buffer.setYDirection(+20);
 			break;
 		case 'd':
-			buffer.setXDirection(+100);
+			buffer.setXDirection(+20);
 			buffer.setYDirection(0);
-			//lblMedman.setLocation(lblMedman.getX()+10, lblMedman.getY());
 			break;
 		case 'w':
 			buffer.setXDirection(0);
-			buffer.setYDirection(-100);
-			//lblMedman.setLocation(lblMedman.getX(), lblMedman.getY()+10);
+			buffer.setYDirection(-20);
 			break;
 		}
 	}

@@ -53,7 +53,7 @@ public class Inicio extends JFrame{
 		// ------------------------------------------------------ Frame ------------------------------------------------------
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 960, 760);
+		setBounds(100, 100, 1200, 900);
 		contentPane = new JPanel();
 		contentPane.setBackground(gris);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

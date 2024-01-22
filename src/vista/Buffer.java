@@ -7,28 +7,12 @@ public class Buffer {
 	// Atributos
 	private JLabel lbl;
 	private int xDirection, yDirection, xTablero = 0, yTablero = 0;
-	private int[][] tablero = new int[6][6];
+	private int[][] tablero = new int[860][720];
 
 	// Constructor
 
 	public Buffer(JLabel lbl) {
 		this.lbl = lbl;
-		
-		/*Nota: Los valores x e y estan como si fuera un eje de coordenadas */
-		
-		this.tablero[2][2] = 1;
-		this.tablero[3][2] = 1;
-		this.tablero[4][2] = 1;
-
-		this.tablero[4][3] = 1;
-		this.tablero[4][4] = 1;
-
-//		for (int i = 0; i < tablero.length; i++) {
-//			for (int j = 0; j < tablero[i].length; j++) {
-//				System.out.print(tablero[i][j]);
-//			}
-//			System.out.println("");
-//		}
 	}
 
 	// Métodos
@@ -43,7 +27,7 @@ public class Buffer {
 		}
 
 		// d
-		if (xDirection > 0 && lbl.getX() + xDirection <= 500) {
+		if (xDirection > 0 && lbl.getX() + xDirection <= 840) {
 			if (tablero[xTablero + 1][yTablero] != 1) {
 				lbl.setLocation(lbl.getX() + xDirection, lbl.getY() + yDirection);
 				xTablero++;
@@ -59,7 +43,7 @@ public class Buffer {
 		}
 
 		// s
-		if (yDirection > 0 && lbl.getY() + yDirection <= 500) {
+		if (yDirection > 0 && lbl.getY() + yDirection <= 400) {
 			if (tablero[xTablero][yTablero + 1] != 1) {
 				lbl.setLocation(lbl.getX() + xDirection, lbl.getY() + yDirection);
 				yTablero++;
