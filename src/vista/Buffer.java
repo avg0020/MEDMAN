@@ -13,7 +13,9 @@ public class Buffer {
 
 	public Buffer(JLabel lbl) {
 		this.lbl = lbl;
-
+		
+		/*Nota: Los valores x e y estan como si fuera un eje de coordenadas */
+		
 		this.tablero[2][2] = 1;
 		this.tablero[3][2] = 1;
 		this.tablero[4][2] = 1;
@@ -21,12 +23,12 @@ public class Buffer {
 		this.tablero[4][3] = 1;
 		this.tablero[4][4] = 1;
 
-		for (int i = 0; i < tablero.length; i++) {
-			for (int j = 0; j < tablero[i].length; j++) {
-				System.out.print(tablero[i][j]);
-			}
-			System.out.println("");
-		}
+//		for (int i = 0; i < tablero.length; i++) {
+//			for (int j = 0; j < tablero[i].length; j++) {
+//				System.out.print(tablero[i][j]);
+//			}
+//			System.out.println("");
+//		}
 	}
 
 	// Métodos
@@ -37,7 +39,6 @@ public class Buffer {
 			if (tablero[xTablero - 1][yTablero] != 1) {
 				lbl.setLocation(lbl.getX() + xDirection, lbl.getY() + yDirection);
 				xTablero--;
-				System.out.println("a: "+xTablero + " | " + yTablero);
 			}
 		}
 
@@ -46,7 +47,6 @@ public class Buffer {
 			if (tablero[xTablero + 1][yTablero] != 1) {
 				lbl.setLocation(lbl.getX() + xDirection, lbl.getY() + yDirection);
 				xTablero++;
-				System.out.println("d: "+xTablero + " | " + yTablero);
 			}
 		}
 
@@ -55,7 +55,6 @@ public class Buffer {
 			if (tablero[xTablero][yTablero - 1] != 1) {
 				lbl.setLocation(lbl.getX() + xDirection, lbl.getY() + yDirection);
 				yTablero--;
-				System.out.println("w: "+xTablero + " | " + yTablero);
 			}
 		}
 
@@ -64,7 +63,6 @@ public class Buffer {
 			if (tablero[xTablero][yTablero + 1] != 1) {
 				lbl.setLocation(lbl.getX() + xDirection, lbl.getY() + yDirection);
 				yTablero++;
-				System.out.println("a: "+xTablero + " | " + yTablero);
 			}
 		}
 	}
