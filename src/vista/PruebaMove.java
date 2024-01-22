@@ -17,9 +17,11 @@ public class PruebaMove extends JFrame implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblMedman = new JLabel();
+	private JLabel lblMuro = new JLabel();
+	private JLabel lblMuro2 = new JLabel();
 	
-	private Buffer buffer = new Buffer();
-	private Medman medman = new Medman(buffer,lblMedman);
+	private Buffer buffer = new Buffer(lblMedman);
+	private Medman medman = new Medman(buffer);
 	
 	
 
@@ -64,6 +66,15 @@ public class PruebaMove extends JFrame implements KeyListener{
 		lblMedman.setIcon(new ImageIcon(getClass().getResource("/resources/medman.png")));
 		panel.add(lblMedman);
 		
+		lblMuro.setBounds(200, 200, 300, 100);
+		lblMuro.setBackground(Color.BLUE);
+		lblMuro.setOpaque(true);
+		panel.add(lblMuro);
+		
+		lblMuro2.setBounds(400, 300, 100, 200);
+		lblMuro2.setBackground(Color.RED);
+		lblMuro2.setOpaque(true);
+		panel.add(lblMuro2);
 		
 		
 	}
@@ -72,23 +83,23 @@ public class PruebaMove extends JFrame implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		switch(e.getKeyChar()) {
 		case 'a': 
-			medman.setXDirection(-100);
-			medman.setYDirection(0);
+			buffer.setXDirection(-100);
+			buffer.setYDirection(0);
 			//lblMedman.setLocation(lblMedman.getX()-10, lblMedman.getY());
 			break;
 		case 's':
-			medman.setXDirection(0);
-			medman.setYDirection(+100);
+			buffer.setXDirection(0);
+			buffer.setYDirection(+100);
 			//lblMedman.setLocation(lblMedman.getX(), lblMedman.getY()-10);
 			break;
 		case 'd':
-			medman.setXDirection(+100);
-			medman.setYDirection(0);
+			buffer.setXDirection(+100);
+			buffer.setYDirection(0);
 			//lblMedman.setLocation(lblMedman.getX()+10, lblMedman.getY());
 			break;
 		case 'w':
-			medman.setXDirection(0);
-			medman.setYDirection(-100);
+			buffer.setXDirection(0);
+			buffer.setYDirection(-100);
 			//lblMedman.setLocation(lblMedman.getX(), lblMedman.getY()+10);
 			break;
 		}

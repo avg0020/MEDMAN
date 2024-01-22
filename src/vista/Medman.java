@@ -10,16 +10,12 @@ public class Medman extends Thread {
 
 	// Atributos
 	private Buffer buffer;
-	private JLabel lbl;
-	private int xDirection, yDirection;
+	
 
 	// Constructores
-	public Medman(Buffer buffer, JLabel lbl) {
+	public Medman(Buffer buffer) {
 		super();
 		this.buffer = buffer;
-		this.lbl = lbl;
-		this.xDirection = 0;
-		this.yDirection = 0;
 	}
 
 	// Métodos
@@ -28,22 +24,7 @@ public class Medman extends Thread {
 		while (true) {
 			try {
 				sleep(200);
-				
-				if (xDirection<0 && lbl.getX()+xDirection>=0) {
-					lbl.setLocation(lbl.getX()+xDirection, lbl.getY()+yDirection);
-				}
-				
-				if (xDirection>0 && lbl.getX()+xDirection<=500) {
-					lbl.setLocation(lbl.getX()+xDirection, lbl.getY()+yDirection);
-				}
-				
-				if (yDirection<0 && lbl.getY()+yDirection>=0) {
-					lbl.setLocation(lbl.getX()+xDirection, lbl.getY()+yDirection);
-				}
-				
-				if (yDirection>0 && lbl.getY()+yDirection<=500) {
-					lbl.setLocation(lbl.getX()+xDirection, lbl.getY()+yDirection);
-				}
+				buffer.mover();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -57,21 +38,4 @@ public class Medman extends Thread {
 	public void setBuffer(Buffer buffer) {
 		this.buffer = buffer;
 	}
-
-	public int getXDirection() {
-		return xDirection;
-	}
-
-	public void setXDirection(int xDirecction) {
-		this.xDirection = xDirecction;
-	}
-
-	public int getYDirection() {
-		return yDirection;
-	}
-
-	public void setYDirection(int yDirection) {
-		this.yDirection = yDirection;
-	}
-
 }
