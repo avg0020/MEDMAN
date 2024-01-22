@@ -29,19 +29,19 @@ public class Medman extends Thread {
 			try {
 				sleep(200);
 				
-				if (xDirection<0 && lbl.getX()+xDirection>0) {
+				if (xDirection<0 && lbl.getX()+xDirection>=0) {
 					lbl.setLocation(lbl.getX()+xDirection, lbl.getY()+yDirection);
 				}
 				
-				if (xDirection>0 && lbl.getX()+xDirection<400) {
+				if (xDirection>0 && lbl.getX()+xDirection<=500) {
 					lbl.setLocation(lbl.getX()+xDirection, lbl.getY()+yDirection);
 				}
 				
-				if (yDirection<0 && lbl.getY()+yDirection>0) {
+				if (yDirection<0 && lbl.getY()+yDirection>=0) {
 					lbl.setLocation(lbl.getX()+xDirection, lbl.getY()+yDirection);
 				}
 				
-				if (yDirection>0 && lbl.getY()+yDirection<400) {
+				if (yDirection>0 && lbl.getY()+yDirection<=500) {
 					lbl.setLocation(lbl.getX()+xDirection, lbl.getY()+yDirection);
 				}
 			} catch (InterruptedException e) {

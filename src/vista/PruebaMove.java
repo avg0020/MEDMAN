@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class PruebaMove extends JFrame implements KeyListener{
 
@@ -42,16 +44,27 @@ public class PruebaMove extends JFrame implements KeyListener{
 	 */
 	public PruebaMove() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 800, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		addKeyListener(this);
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
 		medman.start();
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setLayout(null);
+		panel.setBounds(100, 100, 600, 600);
+		contentPane.add(panel);
+		
 		
 		lblMedman.setBounds(0, 0, 100, 100);
 		lblMedman.setIcon(new ImageIcon(getClass().getResource("/resources/medman.png")));
-		contentPane.add(lblMedman);
+		panel.add(lblMedman);
+		
+		
 		
 	}
 
@@ -59,23 +72,23 @@ public class PruebaMove extends JFrame implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		switch(e.getKeyChar()) {
 		case 'a': 
-			medman.setXDirection(-10);
+			medman.setXDirection(-100);
 			medman.setYDirection(0);
 			//lblMedman.setLocation(lblMedman.getX()-10, lblMedman.getY());
 			break;
 		case 's':
 			medman.setXDirection(0);
-			medman.setYDirection(+10);
+			medman.setYDirection(+100);
 			//lblMedman.setLocation(lblMedman.getX(), lblMedman.getY()-10);
 			break;
 		case 'd':
-			medman.setXDirection(10);
+			medman.setXDirection(+100);
 			medman.setYDirection(0);
 			//lblMedman.setLocation(lblMedman.getX()+10, lblMedman.getY());
 			break;
 		case 'w':
 			medman.setXDirection(0);
-			medman.setYDirection(-10);
+			medman.setYDirection(-100);
 			//lblMedman.setLocation(lblMedman.getX(), lblMedman.getY()+10);
 			break;
 		}
