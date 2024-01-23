@@ -25,7 +25,7 @@ public class Medman extends Thread {
 			try {
 				sleep(200);
 				buffer.mover();
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

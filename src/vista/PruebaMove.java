@@ -62,21 +62,12 @@ public class PruebaMove extends JFrame implements KeyListener{
 		panel.setBounds(200, 200, 860, 420);
 		contentPane.add(panel);
 		
-		
-		lblMedman.setBounds(0, 0, 20, 20);
+		//Medman
+		lblMedman.setBounds(200, 180, 20, 20);
 		lblMedman.setIcon(new ImageIcon(getClass().getResource("/resources/medman.png")));
 		panel.add(lblMedman);
 		
-		lblMuro.setBounds(200, 200, 15, 15);
-		lblMuro.setBackground(Color.BLUE);
-		lblMuro.setOpaque(true);
-		//panel.add(lblMuro);
-		
-		lblMuro2.setBounds(400, 300, 100, 200);
-		lblMuro2.setBackground(Color.RED);
-		lblMuro2.setOpaque(true);
-		//panel.add(lblMuro2);
-		
+		//Mapa
 		lblMapa.setBounds(0, 0, 860, 420);
 		lblMapa.setIcon(new ImageIcon(getClass().getResource("/resources/mapa.jpg")));
 		panel.add(lblMapa);
