@@ -17,12 +17,15 @@ public class PruebaMove extends JFrame implements KeyListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblMedman = new JLabel();
+	private JLabel lblMedast1 = new JLabel();
 	private JLabel lblMedast2 = new JLabel();
+	private JLabel lblMedast3 = new JLabel();
+	private JLabel lblMedast4 = new JLabel();
 	private JLabel lblMapa = new JLabel();
 
 	private Buffer buffer = new Buffer(lblMedman);
 	private Medman medman = new Medman(buffer);
-	private Medgast medgast2 = new Medgast(buffer,lblMedast2,21);
+	private Medgast medgast2 = new Medgast(buffer,lblMedast1,21);
 
 	/**
 	 * Launch the application.
@@ -67,10 +70,22 @@ public class PruebaMove extends JFrame implements KeyListener {
 		lblMedman.setIcon(new ImageIcon(getClass().getResource("/resources/medman.png")));
 		panel.add(lblMedman);
 
-		// Medgast
-		lblMedast2.setBounds(420, 180, 20, 20);
-		lblMedast2.setIcon(new ImageIcon(getClass().getResource("/resources/medgast.png")));
+		// Medgasts
+		lblMedast1.setBounds(420, 180, 20, 20);
+		lblMedast1.setIcon(new ImageIcon(getClass().getResource("/resources/medgast.png")));
+		panel.add(lblMedast1);
+		
+		lblMedast2.setBounds(400, 180, 20, 20);
+		lblMedast2.setIcon(new ImageIcon(getClass().getResource("/resources/medgastG.png")));
 		panel.add(lblMedast2);
+		
+		lblMedast3.setBounds(400, 220, 20, 20);
+		lblMedast3.setIcon(new ImageIcon(getClass().getResource("/resources/medgastP.png")));
+		panel.add(lblMedast3);
+		
+		lblMedast4.setBounds(420, 220, 20, 20);
+		lblMedast4.setIcon(new ImageIcon(getClass().getResource("/resources/medgastY.png")));
+		panel.add(lblMedast4);
 
 		// Mapa
 		lblMapa.setBounds(0, 0, 860, 420);

@@ -17,7 +17,7 @@ public class Medgast extends Thread {
 		this.type = type;
 		this.isFirstTurn = true;
 		this.xTablero=8;
-		this.yTablero=13;
+		this.yTablero=21;
 	}
 
 	// Métodos
@@ -69,23 +69,52 @@ public class Medgast extends Thread {
 		this.direccion = direccion;
 	}
 
+	public JLabel getLbl() {
+		return lbl;
+	}
+
+	public void setLbl(JLabel lbl) {
+		this.lbl = lbl;
+	}
+
 	public void movimientoSalida() {
 		try {
 			switch (type) {
 			case 21:
-				sleep(500);
+				sleep(200);
 				lbl.setLocation(420, 200);
-				sleep(500);
+				sleep(200);
 				lbl.setLocation(440, 200);
-				sleep(500);
+				sleep(200);
 				lbl.setLocation(460, 200);
 				isFirstTurn = false;
 				break;
 			case 22:
+				sleep(200);
+				lbl.setLocation(420, 200);
+				sleep(200);
+				lbl.setLocation(440, 200);
+				sleep(200);
+				lbl.setLocation(460, 200);
+				isFirstTurn = false;
 				break;
 			case 23:
+				sleep(200);
+				lbl.setLocation(420, 200);
+				sleep(200);
+				lbl.setLocation(440, 200);
+				sleep(200);
+				lbl.setLocation(460, 200);
+				isFirstTurn = false;
 				break;
 			case 24:
+				sleep(200);
+				lbl.setLocation(420, 200);
+				sleep(200);
+				lbl.setLocation(440, 200);
+				sleep(200);
+				lbl.setLocation(460, 200);
+				isFirstTurn = false;
 				break;
 			}
 		} catch (Exception e) {

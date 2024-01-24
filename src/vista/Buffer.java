@@ -111,38 +111,53 @@ public class Buffer {
 		// Asegura una posición valida
 		boolean isPosible = false;
 		while (isPosible == false) {
+			
 			// Le damos prioridad a continuar el la direccion que va para que intente
 			// avanzar
 			double continuar = Math.round(Math.random());
+			//System.out.println(continuar);
 			if (continuar>0.75) {
 				medgast.setDireccion((int) Math.round(Math.random()*4));
+				
 			}
+			
+			//Se ve si la dirección es posible
 			switch (medgast.getDireccion()) {
 			case 0: // Derecha
 				if (tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 0) {
-					
-					isPosible = true;
+					System.out.println("Derecha: x "+medgast.getyTablero());
+					medgast.getLbl().setLocation(medgast.getLbl().getX() + 20, medgast.getLbl().getY());
+					medgast.setyTablero(medgast.getyTablero()+1);
+					System.out.println("Derecha: x "+medgast.getyTablero());
+					isPosible=true;
 				}
 				break;
 			case 1: // Arriba
 				if (tablero[medgast.getxTablero() - 1][medgast.getyTablero()] == 0) {
-					
+					System.out.println("arriba: x "+medgast.getyTablero());
+					medgast.getLbl().setLocation(medgast.getLbl().getX(), medgast.getLbl().getY() - 20);
+					medgast.setxTablero(medgast.getxTablero()-1);
+					System.out.println("arriba: x "+medgast.getyTablero());
 					isPosible = true;
 				}
 				break;
 			case 2: // Izquierda
 				if (tablero[medgast.getxTablero()][medgast.getyTablero() - 1] == 0) {
-					
+					System.out.println("izq: x "+medgast.getyTablero());
+					medgast.getLbl().setLocation(medgast.getLbl().getX() - 20, medgast.getLbl().getY());
+					medgast.setyTablero(medgast.getyTablero()-1);
 					isPosible = true;
+					System.out.println("izq: x "+medgast.getyTablero());
 				}
 				break;
 			case 3: // Abajo
 				if (tablero[medgast.getxTablero() + 1][medgast.getyTablero()] == 0) {
-					
+					System.out.println("abajo: x "+medgast.getxTablero());
+					medgast.getLbl().setLocation(medgast.getLbl().getX(), medgast.getLbl().getY()+20);
+					medgast.setxTablero(medgast.getxTablero()+1);
+					System.out.println("abajo: x "+medgast.getyTablero());
 					isPosible = true;
 				}
-				break;
-			default:
 				break;
 			}
 		}
