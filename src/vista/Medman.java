@@ -10,7 +10,7 @@ public class Medman extends Thread {
 
 	// Atributos
 	private Buffer buffer;
-	
+	private int type=2;
 
 	// Constructores
 	public Medman(Buffer buffer) {
@@ -24,7 +24,7 @@ public class Medman extends Thread {
 		while (true) {
 			try {
 				sleep(200);
-				buffer.mover();
+				buffer.moverMedman();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
