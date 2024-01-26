@@ -90,6 +90,8 @@ public class Medgast extends Thread {
 				isFirstTurn = false;
 				break;
 			case 22:
+				sleep(600);
+				lbl.setLocation(400, 200);
 				sleep(200);
 				lbl.setLocation(420, 200);
 				sleep(200);
@@ -99,7 +101,7 @@ public class Medgast extends Thread {
 				isFirstTurn = false;
 				break;
 			case 23:
-				sleep(200);
+				sleep(1000);
 				lbl.setLocation(420, 200);
 				sleep(200);
 				lbl.setLocation(440, 200);
@@ -108,6 +110,8 @@ public class Medgast extends Thread {
 				isFirstTurn = false;
 				break;
 			case 24:
+				sleep(1600);
+				lbl.setLocation(400, 200);
 				sleep(200);
 				lbl.setLocation(420, 200);
 				sleep(200);

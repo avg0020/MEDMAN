@@ -17,15 +17,18 @@ public class PruebaMove extends JFrame implements KeyListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblMedman = new JLabel();
-	private JLabel lblMedast1 = new JLabel();
-	private JLabel lblMedast2 = new JLabel();
-	private JLabel lblMedast3 = new JLabel();
-	private JLabel lblMedast4 = new JLabel();
+	private JLabel lblMedast21 = new JLabel();
+	private JLabel lblMedast22 = new JLabel();
+	private JLabel lblMedast23 = new JLabel();
+	private JLabel lblMedast24 = new JLabel();
 	private JLabel lblMapa = new JLabel();
 
 	private Buffer buffer = new Buffer(lblMedman);
 	private Medman medman = new Medman(buffer);
-	private Medgast medgast2 = new Medgast(buffer,lblMedast1,21);
+	private Medgast medgast21 = new Medgast(buffer,lblMedast21,21);
+	private Medgast medgast22 = new Medgast(buffer, lblMedast22, 22);
+	private Medgast medgast23 = new Medgast(buffer, lblMedast23, 23);
+	private Medgast medgast24 = new Medgast(buffer, lblMedast24, 24);
 
 	/**
 	 * Launch the application.
@@ -56,7 +59,10 @@ public class PruebaMove extends JFrame implements KeyListener {
 		contentPane.setLayout(null);
 
 		medman.start();
-		medgast2.start();
+		medgast21.start();
+		medgast22.start();
+		medgast23.start();
+		medgast24.start();
 		
 		//Panel con el mapa
 		JPanel panel = new JPanel();
@@ -71,21 +77,21 @@ public class PruebaMove extends JFrame implements KeyListener {
 		panel.add(lblMedman);
 
 		// Medgasts
-		lblMedast1.setBounds(420, 180, 20, 20);
-		lblMedast1.setIcon(new ImageIcon(getClass().getResource("/resources/medgast.png")));
-		panel.add(lblMedast1);
+		lblMedast21.setBounds(420, 180, 20, 20);
+		lblMedast21.setIcon(new ImageIcon(getClass().getResource("/resources/medgast.png")));
+		panel.add(lblMedast21);
 		
-		lblMedast2.setBounds(400, 180, 20, 20);
-		lblMedast2.setIcon(new ImageIcon(getClass().getResource("/resources/medgastG.png")));
-		panel.add(lblMedast2);
+		lblMedast22.setBounds(400, 180, 20, 20);
+		lblMedast22.setIcon(new ImageIcon(getClass().getResource("/resources/medgastG.png")));
+		panel.add(lblMedast22);
 		
-		lblMedast3.setBounds(400, 220, 20, 20);
-		lblMedast3.setIcon(new ImageIcon(getClass().getResource("/resources/medgastP.png")));
-		panel.add(lblMedast3);
+		lblMedast23.setBounds(400, 220, 20, 20);
+		lblMedast23.setIcon(new ImageIcon(getClass().getResource("/resources/medgastP.png")));
+		panel.add(lblMedast23);
 		
-		lblMedast4.setBounds(420, 220, 20, 20);
-		lblMedast4.setIcon(new ImageIcon(getClass().getResource("/resources/medgastY.png")));
-		panel.add(lblMedast4);
+		lblMedast24.setBounds(420, 220, 20, 20);
+		lblMedast24.setIcon(new ImageIcon(getClass().getResource("/resources/medgastY.png")));
+		panel.add(lblMedast24);
 
 		// Mapa
 		lblMapa.setBounds(0, 0, 860, 420);
