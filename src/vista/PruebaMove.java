@@ -16,14 +16,24 @@ public class PruebaMove extends JFrame implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPanel panel;
+	
+	//Labels
 	private JLabel lblMedman = new JLabel();
 	private JLabel lblMedast21 = new JLabel();
 	private JLabel lblMedast22 = new JLabel();
 	private JLabel lblMedast23 = new JLabel();
 	private JLabel lblMedast24 = new JLabel();
+	private JLabel lblPremio1 = new JLabel();
+	private JLabel lblPremio2 = new JLabel();
+	private JLabel lblPremio3 = new JLabel();
+	private JLabel lblPremio4 = new JLabel();
+	private JLabel lblPremio5 = new JLabel();
+	private JLabel lblPremio6 = new JLabel();
 	private JLabel lblMapa = new JLabel();
-
-	private Buffer buffer = new Buffer(lblMedman);
+	
+	//Objetos
+	private Buffer buffer = new Buffer(lblMedman, this);
 	private Medman medman = new Medman(buffer);
 	private Medgast medgast21 = new Medgast(buffer,lblMedast21,21);
 	private Medgast medgast22 = new Medgast(buffer, lblMedast22, 22);
@@ -65,7 +75,7 @@ public class PruebaMove extends JFrame implements KeyListener {
 		medgast24.start();
 		
 		//Panel con el mapa
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setLayout(null);
 		panel.setBounds(200, 200, 860, 420);
@@ -92,7 +102,31 @@ public class PruebaMove extends JFrame implements KeyListener {
 		lblMedast24.setBounds(420, 220, 20, 20);
 		lblMedast24.setIcon(new ImageIcon(getClass().getResource("/resources/medgastY.png")));
 		panel.add(lblMedast24);
-
+		
+		//Premios
+		lblPremio1.setBounds(buffer.getYPremios(0)*20+40, buffer.getXPremios(0)*20+40, 20, 20);
+		lblPremio1.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
+		panel.add(lblPremio1);
+		
+		lblPremio2.setBounds(buffer.getYPremios(1)*20+40, buffer.getXPremios(1)*20+40, 20, 20);
+		lblPremio2.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
+		panel.add(lblPremio2);
+		
+		lblPremio3.setBounds(buffer.getYPremios(2)*20+40, buffer.getXPremios(2)*20+40, 20, 20);
+		lblPremio3.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
+		panel.add(lblPremio3);
+		
+		lblPremio4.setBounds(buffer.getYPremios(3)*20+40, buffer.getXPremios(3)*20+40, 20, 20);
+		lblPremio4.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
+		panel.add(lblPremio4);
+		
+		lblPremio5.setBounds(buffer.getYPremios(4)*20+40, buffer.getXPremios(4)*20+40, 20, 20);
+		lblPremio5.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
+		panel.add(lblPremio5);
+		
+		lblPremio6.setBounds(buffer.getYPremios(5)*20+40, buffer.getXPremios(5)*20+40, 20, 20);
+		lblPremio6.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
+		panel.add(lblPremio6);
 		// Mapa
 		lblMapa.setBounds(0, 0, 860, 420);
 		lblMapa.setIcon(new ImageIcon(getClass().getResource("/resources/mapa.jpg")));
@@ -133,4 +167,61 @@ public class PruebaMove extends JFrame implements KeyListener {
 
 	}
 
+	public JLabel getLblPremio1() {
+		return lblPremio1;
+	}
+
+	public void setLblPremio1(JLabel lblPremio1) {
+		this.lblPremio1 = lblPremio1;
+	}
+
+	public JLabel getLblPremio2() {
+		return lblPremio2;
+	}
+
+	public void setLblPremio2(JLabel lblPremio2) {
+		this.lblPremio2 = lblPremio2;
+	}
+
+	public JLabel getLblPremio3() {
+		return lblPremio3;
+	}
+
+	public void setLblPremio3(JLabel lblPremio3) {
+		this.lblPremio3 = lblPremio3;
+	}
+
+	public JLabel getLblPremio4() {
+		return lblPremio4;
+	}
+
+	public void setLblPremio4(JLabel lblPremio4) {
+		this.lblPremio4 = lblPremio4;
+	}
+
+	public JLabel getLblPremio5() {
+		return lblPremio5;
+	}
+
+	public void setLblPremio5(JLabel lblPremio5) {
+		this.lblPremio5 = lblPremio5;
+	}
+
+	public JLabel getLblPremio6() {
+		return lblPremio6;
+	}
+
+	public void setLblPremio6(JLabel lblPremio6) {
+		this.lblPremio6 = lblPremio6;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+	
+	
 }
