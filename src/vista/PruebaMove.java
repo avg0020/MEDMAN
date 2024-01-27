@@ -61,9 +61,10 @@ public class PruebaMove extends JFrame implements KeyListener {
 	 */
 	public PruebaMove() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1200, 900);
+		setBounds(100, 100, 1186, 900);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.BLACK);
 		addKeyListener(this);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -78,57 +79,58 @@ public class PruebaMove extends JFrame implements KeyListener {
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setLayout(null);
-		panel.setBounds(200, 200, 860, 420);
+		panel.setBounds(0, 200, 1170, 510);
 		contentPane.add(panel);
 
 		// Medman
-		lblMedman.setBounds(200, 180, 20, 20);
+		lblMedman.setBounds(240, 210, 30, 30);
 		lblMedman.setIcon(new ImageIcon(getClass().getResource("/resources/medman.png")));
 		panel.add(lblMedman);
 
 		// Medgasts
-		lblMedast21.setBounds(420, 180, 20, 20);
-		lblMedast21.setIcon(new ImageIcon(getClass().getResource("/resources/medgast.png")));
+		lblMedast21.setBounds(570, 210, 30, 30);
+		lblMedast21.setIcon(new ImageIcon(getClass().getResource("/resources/medgastO.png")));
 		panel.add(lblMedast21);
 		
-		lblMedast22.setBounds(400, 180, 20, 20);
-		lblMedast22.setIcon(new ImageIcon(getClass().getResource("/resources/medgastG.png")));
+		lblMedast22.setBounds(540, 210, 30, 30);
+		lblMedast22.setIcon(new ImageIcon(getClass().getResource("/resources/medgastR.png")));
 		panel.add(lblMedast22);
 		
-		lblMedast23.setBounds(400, 220, 20, 20);
-		lblMedast23.setIcon(new ImageIcon(getClass().getResource("/resources/medgastP.png")));
+		lblMedast23.setBounds(540, 270, 30, 30);
+		lblMedast23.setIcon(new ImageIcon(getClass().getResource("/resources/medgastB.png")));
 		panel.add(lblMedast23);
 		
-		lblMedast24.setBounds(420, 220, 20, 20);
-		lblMedast24.setIcon(new ImageIcon(getClass().getResource("/resources/medgastY.png")));
+		lblMedast24.setBounds(570, 270, 30, 30);
+		lblMedast24.setIcon(new ImageIcon(getClass().getResource("/resources/medgastP.png")));
 		panel.add(lblMedast24);
 		
 		//Premios
-		lblPremio1.setBounds(buffer.getYPremios(0)*20+40, buffer.getXPremios(0)*20+40, 20, 20);
+		lblPremio1.setBounds(buffer.getYPremios(0)*30, buffer.getXPremios(0)*30, 30, 30);
 		lblPremio1.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio1);
 		
-		lblPremio2.setBounds(buffer.getYPremios(1)*20+40, buffer.getXPremios(1)*20+40, 20, 20);
+		lblPremio2.setBounds(buffer.getYPremios(1)*30, buffer.getXPremios(1)*30, 30, 30);
 		lblPremio2.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio2);
 		
-		lblPremio3.setBounds(buffer.getYPremios(2)*20+40, buffer.getXPremios(2)*20+40, 20, 20);
+		lblPremio3.setBounds(buffer.getYPremios(2)*30, buffer.getXPremios(2)*30, 30, 30);
 		lblPremio3.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio3);
 		
-		lblPremio4.setBounds(buffer.getYPremios(3)*20+40, buffer.getXPremios(3)*20+40, 20, 20);
+		lblPremio4.setBounds(buffer.getYPremios(3)*30, buffer.getXPremios(3)*30, 30, 30);
 		lblPremio4.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio4);
 		
-		lblPremio5.setBounds(buffer.getYPremios(4)*20+40, buffer.getXPremios(4)*20+40, 20, 20);
+		lblPremio5.setBounds(buffer.getYPremios(4)*30, buffer.getXPremios(4)*30, 30, 30);
 		lblPremio5.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio5);
 		
-		lblPremio6.setBounds(buffer.getYPremios(5)*20+40, buffer.getXPremios(5)*20+40, 20, 20);
+		lblPremio6.setBounds(buffer.getYPremios(5)*30, buffer.getXPremios(5)*30, 30, 30);
 		lblPremio6.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio6);
+		
 		// Mapa
-		lblMapa.setBounds(0, 0, 860, 420);
+		lblMapa.setBounds(0, 0, 1170, 510);
 		lblMapa.setIcon(new ImageIcon(getClass().getResource("/resources/mapa.jpg")));
 		panel.add(lblMapa);
 	}
@@ -137,20 +139,20 @@ public class PruebaMove extends JFrame implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 		switch (e.getKeyChar()) {
 		case 'a':
-			buffer.setXDirection(-20);
+			buffer.setXDirection(-30);
 			buffer.setYDirection(0);
 			break;
 		case 's':
 			buffer.setXDirection(0);
-			buffer.setYDirection(+20);
+			buffer.setYDirection(+30);
 			break;
 		case 'd':
-			buffer.setXDirection(+20);
+			buffer.setXDirection(+30);
 			buffer.setYDirection(0);
 			break;
 		case 'w':
 			buffer.setXDirection(0);
-			buffer.setYDirection(-20);
+			buffer.setYDirection(-30);
 			break;
 		}
 	}

@@ -82,42 +82,42 @@ public class Medgast extends Thread {
 			switch (type) {
 			case 21:
 				sleep(200);
-				lbl.setLocation(420, 200);
+				lbl.setLocation(570, 240);
 				sleep(200);
-				lbl.setLocation(440, 200);
+				lbl.setLocation(600, 240);
 				sleep(200);
-				lbl.setLocation(460, 200);
+				lbl.setLocation(630, 240);
 				isFirstTurn = false;
 				break;
 			case 22:
 				sleep(600);
-				lbl.setLocation(400, 200);
+				lbl.setLocation(540, 240);
 				sleep(200);
-				lbl.setLocation(420, 200);
+				lbl.setLocation(570, 240);
 				sleep(200);
-				lbl.setLocation(440, 200);
+				lbl.setLocation(600, 240);
 				sleep(200);
-				lbl.setLocation(460, 200);
+				lbl.setLocation(630, 240);
 				isFirstTurn = false;
 				break;
 			case 23:
 				sleep(1000);
-				lbl.setLocation(420, 200);
+				lbl.setLocation(570, 240);
 				sleep(200);
-				lbl.setLocation(440, 200);
+				lbl.setLocation(600, 240);
 				sleep(200);
-				lbl.setLocation(460, 200);
+				lbl.setLocation(630, 240);
 				isFirstTurn = false;
 				break;
 			case 24:
 				sleep(1600);
-				lbl.setLocation(400, 200);
+				lbl.setLocation(540, 240);
 				sleep(200);
-				lbl.setLocation(420, 200);
+				lbl.setLocation(570, 240);
 				sleep(200);
-				lbl.setLocation(440, 200);
+				lbl.setLocation(600, 240);
 				sleep(200);
-				lbl.setLocation(460, 200);
+				lbl.setLocation(630, 240);
 				isFirstTurn = false;
 				break;
 			}
