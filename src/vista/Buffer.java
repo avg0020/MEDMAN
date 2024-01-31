@@ -1,5 +1,7 @@
 package vista;
 
+import java.util.concurrent.Semaphore;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -11,6 +13,7 @@ public class Buffer {
 	private int []xPremios = new int[6];
 	private int []yPremios = new int[6];
 	private PruebaMove game;
+	private Semaphore semaforoMedman = new Semaphore(1);
 	
 	// Matriz del mapa
 	// 0 - Camino
@@ -71,8 +74,8 @@ public class Buffer {
 	// Métodos
 
 	// Movimiento del personaje
-	public void moverMedman() {
-
+	public void moverMedman() throws Exception{
+		semaforoMedman.acquire();
 		// a
 		if ((tablero[xTablero][yTablero - 1] == 0 || tablero[xTablero][yTablero - 1] > 40) && xDirection == -30) {
 			lbl.setLocation(lbl.getX() + xDirection, lbl.getY() + yDirection);
@@ -80,6 +83,8 @@ public class Buffer {
 			yTablero--;
 			cogerPremio();
 			tablero[xTablero][yTablero]=3;
+		}else if(tablero[xTablero][yTablero - 1] == 3) {
+			System.out.println("toco");
 		}
 
 		// d
@@ -89,6 +94,8 @@ public class Buffer {
 			yTablero++;
 			cogerPremio();
 			tablero[xTablero][yTablero]=3;
+		}else if(tablero[xTablero][yTablero - 1] == 3) {
+			System.out.println("toco");
 		}
 
 		// w
@@ -98,6 +105,8 @@ public class Buffer {
 			xTablero--;
 			cogerPremio();
 			tablero[xTablero][yTablero]=3;
+		}else if(tablero[xTablero][yTablero - 1] == 3) {
+			System.out.println("toco");
 		}
 
 		// s
@@ -107,6 +116,8 @@ public class Buffer {
 			xTablero++;
 			cogerPremio();
 			tablero[xTablero][yTablero]=3;
+		}else if(tablero[xTablero][yTablero - 1] == 3) {
+			System.out.println("toco");
 		}
 
 		// Izquierda - Derecha
@@ -126,6 +137,7 @@ public class Buffer {
 			yTablero = 4;
 			tablero[xTablero][yTablero]=3;
 		}
+		semaforoMedman.release();
 	}
 
 	// Movimiento de los fantasmas
@@ -134,11 +146,11 @@ public class Buffer {
 	// 2 - izquierda
 	// 3 - abajo
 
-	public void moverMedgast(Medgast medgast) {
+	public void moverMedgast(Medgast medgast) throws Exception{
 		// Asegura una posición valida
 		boolean isPosible = false;
 		while (isPosible == false) {
-			
+			semaforoMedman.acquire();
 			// Le damos prioridad a continuar el la direccion que va para que intente
 			// avanzar
 			double continuar = Math.round(Math.random());
@@ -150,34 +162,51 @@ public class Buffer {
 			//Se ve si la dirección es posible
 			switch (medgast.getDireccion()) {
 			case 0: // Derecha
-				if (tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 0 || tablero[medgast.getxTablero()][medgast.getyTablero() + 1] > 40) {
+				if (tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 0 || tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 2 || tablero[medgast.getxTablero()][medgast.getyTablero() + 1] > 40) {
 					medgast.getLbl().setLocation(medgast.getLbl().getX() + 30, medgast.getLbl().getY());
+					tablero[medgast.getxTablero()][medgast.getyTablero()] = 0;
 					medgast.setyTablero(medgast.getyTablero()+1);
+					tablero[medgast.getxTablero()][medgast.getyTablero()] = 2;
 					isPosible=true;
+				}else if(tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 3) {
+					System.out.println("toco");
 				}
 				break;
 			case 1: // Arriba
-				if (tablero[medgast.getxTablero() - 1][medgast.getyTablero()] == 0 || tablero[medgast.getxTablero() - 1][medgast.getyTablero()] > 40) {
+				if (tablero[medgast.getxTablero() - 1][medgast.getyTablero()] == 0 || tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 2 || tablero[medgast.getxTablero() - 1][medgast.getyTablero()] > 40) {
 					medgast.getLbl().setLocation(medgast.getLbl().getX(), medgast.getLbl().getY() - 30);
+					tablero[medgast.getxTablero()][medgast.getyTablero()] = 0;
 					medgast.setxTablero(medgast.getxTablero()-1);
+					tablero[medgast.getxTablero()][medgast.getyTablero()] = 2;
 					isPosible = true;
+				}else if(tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 3) {
+					System.out.println("toco");
 				}
 				break;
 			case 2: // Izquierda
-				if (tablero[medgast.getxTablero()][medgast.getyTablero() - 1] == 0 || tablero[medgast.getxTablero()][medgast.getyTablero() - 1] > 40) {
+				if (tablero[medgast.getxTablero()][medgast.getyTablero() - 1] == 0 || tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 2 || tablero[medgast.getxTablero()][medgast.getyTablero() - 1] > 40) {
 					medgast.getLbl().setLocation(medgast.getLbl().getX() - 30, medgast.getLbl().getY());
+					tablero[medgast.getxTablero()][medgast.getyTablero()] = 0;
 					medgast.setyTablero(medgast.getyTablero()-1);
+					tablero[medgast.getxTablero()][medgast.getyTablero()] = 2;
 					isPosible = true;
+				}else if(tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 3) {
+					System.out.println("toco");
 				}
 				break;
 			case 3: // Abajo
-				if (tablero[medgast.getxTablero() + 1][medgast.getyTablero()] == 0 || tablero[medgast.getxTablero() + 1][medgast.getyTablero()] > 40) {
+				if (tablero[medgast.getxTablero() + 1][medgast.getyTablero()] == 0 || tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 2 || tablero[medgast.getxTablero() + 1][medgast.getyTablero()] > 40) {
 					medgast.getLbl().setLocation(medgast.getLbl().getX(), medgast.getLbl().getY()+30);
+					tablero[medgast.getxTablero()][medgast.getyTablero()] = 0;
 					medgast.setxTablero(medgast.getxTablero()+1);
+					tablero[medgast.getxTablero()][medgast.getyTablero()] = 2;
 					isPosible = true;
+				}else if(tablero[medgast.getxTablero()][medgast.getyTablero() + 1] == 3) {
+					System.out.println("toco");
 				}
 				break;
 			}
+			semaforoMedman.release();
 		}
 	}
 	
