@@ -20,10 +20,10 @@ public class PruebaMove extends JFrame implements KeyListener {
 	
 	//Labels
 	private JLabel lblMedman = new JLabel();
-	private JLabel lblMedast21 = new JLabel();
-	private JLabel lblMedast22 = new JLabel();
-	private JLabel lblMedast23 = new JLabel();
-	private JLabel lblMedast24 = new JLabel();
+	private JLabel lblMedgast21 = new JLabel();
+	private JLabel lblMedgast22 = new JLabel();
+	private JLabel lblMedgast23 = new JLabel();
+	private JLabel lblMedgast24 = new JLabel();
 	private JLabel lblPremio1 = new JLabel();
 	private JLabel lblPremio2 = new JLabel();
 	private JLabel lblPremio3 = new JLabel();
@@ -35,10 +35,10 @@ public class PruebaMove extends JFrame implements KeyListener {
 	//Objetos
 	private Buffer buffer = new Buffer(lblMedman, this);
 	private Medman medman = new Medman(buffer);
-	private Medgast medgast21 = new Medgast(buffer,lblMedast21,21);
-	private Medgast medgast22 = new Medgast(buffer, lblMedast22, 22);
-	private Medgast medgast23 = new Medgast(buffer, lblMedast23, 23);
-	private Medgast medgast24 = new Medgast(buffer, lblMedast24, 24);
+	private Medgast medgast21 = new Medgast(buffer,lblMedgast21,21);
+	private Medgast medgast22 = new Medgast(buffer, lblMedgast22, 22);
+	private Medgast medgast23 = new Medgast(buffer, lblMedgast23, 23);
+	private Medgast medgast24 = new Medgast(buffer, lblMedgast24, 24);
 
 	/**
 	 * Launch the application.
@@ -88,21 +88,21 @@ public class PruebaMove extends JFrame implements KeyListener {
 		panel.add(lblMedman);
 
 		// Medgasts
-		lblMedast21.setBounds(570, 210, 30, 30);
-		lblMedast21.setIcon(new ImageIcon(getClass().getResource("/resources/medgastO.png")));
-		panel.add(lblMedast21);
+		lblMedgast21.setBounds(570, 210, 30, 30);
+		lblMedgast21.setIcon(new ImageIcon(getClass().getResource("/resources/medgastO.png")));
+		panel.add(lblMedgast21);
 		
-		lblMedast22.setBounds(540, 210, 30, 30);
-		lblMedast22.setIcon(new ImageIcon(getClass().getResource("/resources/medgastR.png")));
-		panel.add(lblMedast22);
+		lblMedgast22.setBounds(540, 210, 30, 30);
+		lblMedgast22.setIcon(new ImageIcon(getClass().getResource("/resources/medgastR.png")));
+		panel.add(lblMedgast22);
 		
-		lblMedast23.setBounds(540, 270, 30, 30);
-		lblMedast23.setIcon(new ImageIcon(getClass().getResource("/resources/medgastB.png")));
-		panel.add(lblMedast23);
+		lblMedgast23.setBounds(540, 270, 30, 30);
+		lblMedgast23.setIcon(new ImageIcon(getClass().getResource("/resources/medgastB.png")));
+		panel.add(lblMedgast23);
 		
-		lblMedast24.setBounds(570, 270, 30, 30);
-		lblMedast24.setIcon(new ImageIcon(getClass().getResource("/resources/medgastP.png")));
-		panel.add(lblMedast24);
+		lblMedgast24.setBounds(570, 270, 30, 30);
+		lblMedgast24.setIcon(new ImageIcon(getClass().getResource("/resources/medgastP.png")));
+		panel.add(lblMedgast24);
 		
 		//Premios
 		lblPremio1.setBounds(buffer.getYPremios(0)*30, buffer.getXPremios(0)*30, 30, 30);
@@ -224,6 +224,37 @@ public class PruebaMove extends JFrame implements KeyListener {
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
+
+	public void resetMegast21() {
+		lblMedgast21.setBounds(570, 210, 30, 30);
+		medgast21.setFirstTurn(true);
+		buffer.setTablero(medgast21.getxTablero(), medgast21.getyTablero());
+		medgast21.setxTablero(8);
+		medgast21.setyTablero(21);
+	}
 	
+	public void resetMegast22() {
+		lblMedgast22.setBounds(540, 210, 30, 30);
+		medgast22.setFirstTurn(true);
+		buffer.setTablero(medgast22.getxTablero(), medgast22.getyTablero());
+		medgast22.setxTablero(8);
+		medgast22.setyTablero(21);
+	}
+	
+	public void resetMegast23() {
+		lblMedgast23.setBounds(540, 270, 30, 30);
+		medgast23.setFirstTurn(true);
+		buffer.setTablero(medgast23.getxTablero(), medgast23.getyTablero());
+		medgast23.setxTablero(8);
+		medgast23.setyTablero(21);
+	}
+	
+	public void resetMegast24() {
+		lblMedgast24.setBounds(570, 270, 30, 30);
+		medgast24.setFirstTurn(true);
+		buffer.setTablero(medgast24.getxTablero(), medgast24.getyTablero());
+		medgast24.setxTablero(8);
+		medgast24.setyTablero(21);
+	}
 	
 }

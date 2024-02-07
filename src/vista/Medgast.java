@@ -19,7 +19,7 @@ public class Medgast extends Thread {
 		this.xTablero=8;
 		this.yTablero=21;
 	}
-
+	
 	// Métodos
 	@Override
 	public void run() {
@@ -76,6 +76,14 @@ public class Medgast extends Thread {
 	public void setLbl(JLabel lbl) {
 		this.lbl = lbl;
 	}
+	
+	public boolean isFirstTurn() {
+		return isFirstTurn;
+	}
+
+	public void setFirstTurn(boolean isFirstTurn) {
+		this.isFirstTurn = isFirstTurn;
+	}
 
 	public void movimientoSalida() {
 		try {
@@ -124,5 +132,5 @@ public class Medgast extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	};
+	}
 }
