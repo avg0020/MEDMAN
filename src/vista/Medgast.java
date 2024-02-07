@@ -16,8 +16,6 @@ public class Medgast extends Thread {
 		this.lbl = lbl;
 		this.type = type;
 		this.isFirstTurn = true;
-		this.xTablero=8;
-		this.yTablero=21;
 	}
 	
 	// Métodos
@@ -95,6 +93,8 @@ public class Medgast extends Thread {
 				lbl.setLocation(600, 240);
 				sleep(200);
 				lbl.setLocation(630, 240);
+				this.xTablero=8;
+				this.yTablero=21;
 				isFirstTurn = false;
 				break;
 			case 22:
@@ -106,6 +106,8 @@ public class Medgast extends Thread {
 				lbl.setLocation(600, 240);
 				sleep(200);
 				lbl.setLocation(630, 240);
+				this.xTablero=8;
+				this.yTablero=21;
 				isFirstTurn = false;
 				break;
 			case 23:
@@ -115,6 +117,8 @@ public class Medgast extends Thread {
 				lbl.setLocation(600, 240);
 				sleep(200);
 				lbl.setLocation(630, 240);
+				this.xTablero=8;
+				this.yTablero=21;
 				isFirstTurn = false;
 				break;
 			case 24:
@@ -126,6 +130,8 @@ public class Medgast extends Thread {
 				lbl.setLocation(600, 240);
 				sleep(200);
 				lbl.setLocation(630, 240);
+				this.xTablero=8;
+				this.yTablero=21;
 				isFirstTurn = false;
 				break;
 			}
@@ -133,4 +139,5 @@ public class Medgast extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
 }

@@ -224,37 +224,53 @@ public class PruebaMove extends JFrame implements KeyListener {
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
+	
+	public Medgast getMedgast21() {
+		return medgast21;
+	}
+
+	public Medgast getMedgast22() {
+		return medgast22;
+	}
+
+	public Medgast getMedgast23() {
+		return medgast23;
+	}
+
+	public Medgast getMedgast24() {
+		return medgast24;
+	}
 
 	public void resetMegast21() {
 		lblMedgast21.setBounds(570, 210, 30, 30);
 		medgast21.setFirstTurn(true);
-		buffer.setTablero(medgast21.getxTablero(), medgast21.getyTablero());
-		medgast21.setxTablero(8);
-		medgast21.setyTablero(21);
+		medgast21.setDireccion(-1);
+		medgast21.setxTablero(-1);
+		medgast21.setyTablero(-1);
 	}
 	
 	public void resetMegast22() {
 		lblMedgast22.setBounds(540, 210, 30, 30);
 		medgast22.setFirstTurn(true);
-		buffer.setTablero(medgast22.getxTablero(), medgast22.getyTablero());
-		medgast22.setxTablero(8);
-		medgast22.setyTablero(21);
+		medgast22.setDireccion(-1);
+		medgast22.setxTablero(-1);
+		medgast22.setyTablero(-1);
 	}
 	
 	public void resetMegast23() {
 		lblMedgast23.setBounds(540, 270, 30, 30);
 		medgast23.setFirstTurn(true);
-		buffer.setTablero(medgast23.getxTablero(), medgast23.getyTablero());
-		medgast23.setxTablero(8);
-		medgast23.setyTablero(21);
+		medgast23.setDireccion(-1);
+		medgast23.setxTablero(-1);
+		medgast23.setyTablero(-1);
 	}
 	
 	public void resetMegast24() {
 		lblMedgast24.setBounds(570, 270, 30, 30);
 		medgast24.setFirstTurn(true);
-		buffer.setTablero(medgast24.getxTablero(), medgast24.getyTablero());
-		medgast24.setxTablero(8);
-		medgast24.setyTablero(21);
+		medgast24.setDireccion(-1);
+		medgast24.setxTablero(-1);
+		medgast24.setyTablero(-1);
 	}
 	
 }
