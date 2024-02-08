@@ -89,7 +89,7 @@ public class Inicio extends JFrame{
 		panelMenu.setBackground(gris);
 		panelMenu.setOpaque(true);
 		panelMenu.setLayout(null);
-		contentPane.add(panelMenu);
+		//contentPane.add(panelMenu);
 
 		// Botón partida un jugador
 		JButton btnInit1Player = new JButton("1 Jugador");
@@ -164,9 +164,18 @@ public class Inicio extends JFrame{
 			}
 		});
 		panelMenu.add(btnInit2Players);
-
+		
+		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setBounds(100, 100, 480, 480);
+		lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel1 = new JLabel();
+		lblNewLabel1.setBounds(300, 300, 480, 480);
+		lblNewLabel1.setIcon(new ImageIcon(getClass().getResource("/resources/hearth2.gif")));
+		contentPane.add(lblNewLabel1);
+		
 		// ------------------------------------------------------ Lógica ------------------------------------------------------
 		
 	}
-
 }
