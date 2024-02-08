@@ -87,21 +87,18 @@ public class Buffer {
 		if ((tablero[xTablero][yTablero + 1] == 0 || tablero[xTablero][yTablero + 1] > 40) && xDirection == +30) {
 			lblmedman.setLocation(lblmedman.getX() + xDirection, lblmedman.getY() + yDirection);
 			yTablero++;
-			cogerPremio();
 		}
 
 		// w
 		if ((tablero[xTablero - 1][yTablero] == 0 || tablero[xTablero - 1][yTablero] > 40) && yDirection == -30) {
 			lblmedman.setLocation(lblmedman.getX() + xDirection, lblmedman.getY() + yDirection);
 			xTablero--;
-			cogerPremio();
 		}
 
 		// s
 		if ((tablero[xTablero + 1][yTablero] == 0 || tablero[xTablero + 1][yTablero] > 40) && yDirection == +30) {
 			lblmedman.setLocation(lblmedman.getX() + xDirection, lblmedman.getY() + yDirection);
 			xTablero++;
-			cogerPremio();
 		}
 
 		// Izquierda - Derecha
@@ -128,6 +125,10 @@ public class Buffer {
 			
 		}
 		semaforoMedman.release();
+		
+		if(tablero[xTablero][yTablero] >40) {
+			cogerPremio();
+		}
 	}
 
 	// Movimiento de los fantasmas
@@ -155,13 +156,12 @@ public class Buffer {
 					medgast.getLbl().setLocation(medgast.getLbl().getX() + 30, medgast.getLbl().getY());
 					medgast.setyTablero(medgast.getyTablero()+1);					
 					isPosible=true;
-				}
+				} 
 				break;
 			case 1: // Arriba
 				if (tablero[medgast.getxTablero() - 1][medgast.getyTablero()] == 0 || tablero[medgast.getxTablero() - 1][medgast.getyTablero()] > 40 ) {
 					medgast.getLbl().setLocation(medgast.getLbl().getX(), medgast.getLbl().getY() - 30);
 					medgast.setxTablero(medgast.getxTablero()-1);					
-
 					isPosible = true;
 				}
 				break;
