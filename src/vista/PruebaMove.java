@@ -19,21 +19,36 @@ public class PruebaMove extends JFrame implements KeyListener {
 	private JPanel panel;
 
 	// Labels
+	
+	//Meman
 	private JLabel lblMedman = new JLabel();
+	
+	//Medgast
 	private JLabel lblMedgast21 = new JLabel();
 	private JLabel lblMedgast22 = new JLabel();
 	private JLabel lblMedgast23 = new JLabel();
 	private JLabel lblMedgast24 = new JLabel();
+	
+	//Premios
 	private JLabel lblPremio1 = new JLabel();
 	private JLabel lblPremio2 = new JLabel();
 	private JLabel lblPremio3 = new JLabel();
 	private JLabel lblPremio4 = new JLabel();
 	private JLabel lblPremio5 = new JLabel();
 	private JLabel lblPremio6 = new JLabel();
+	
+	//Derrotas
 	private JLabel lblVictoria = new JLabel();
 	private JLabel lblDerrota = new JLabel();
+	
+	//Mapa
 	private JLabel lblMapa = new JLabel();
-
+	
+	//Vida
+	private JLabel lblVida1 = new JLabel();
+	private JLabel lblVida2 = new JLabel();
+	private JLabel lblVida3 = new JLabel();
+	
 	// Objetos
 	private Buffer buffer = new Buffer(lblMedman, this);
 	private Medman medman = new Medman(buffer);
@@ -143,7 +158,19 @@ public class PruebaMove extends JFrame implements KeyListener {
 		lblDerrota.setIcon(new ImageIcon(getClass().getResource("/resources/derrota.gif")));
 		lblDerrota.setVisible(false);
 		panel.add(lblDerrota);
-
+		
+		//Vidas
+		lblVida1.setBounds(100, 100, 60, 60);
+		lblVida1.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
+		contentPane.add(lblVida1);
+		
+		lblVida2.setBounds(160, 100, 60, 60);
+		lblVida2.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
+		contentPane.add(lblVida2);
+		
+		lblVida3.setBounds(220, 100, 60, 60);
+		lblVida3.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
+		contentPane.add(lblVida3);
 
 		// Mapa
 		lblMapa.setBounds(0, 0, 1170, 510);
@@ -313,5 +340,19 @@ public class PruebaMove extends JFrame implements KeyListener {
 	public void losse() {
 		lblDerrota.setVisible(true);
 		lblDerrota.setComponentZOrder(lblDerrota, 1);
+	}
+	
+	public void losseLife(int vida) {
+		switch (vida) {
+		case 1:
+			lblVida1.setIcon(new ImageIcon(getClass().getResource("/resources/hearthBoom1.gif")));
+			break;
+		case 2:
+			lblVida2.setIcon(new ImageIcon(getClass().getResource("/resources/hearthBoom2.gif")));
+			break;
+		case 3:
+			lblVida3.setIcon(new ImageIcon(getClass().getResource("/resources/hearthBoom3.gif")));
+			break;
+		}
 	}
 }

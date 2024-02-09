@@ -5,7 +5,7 @@ import java.util.concurrent.Semaphore;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Buffer {
+public class Buffer extends Thread{
 
 	// Atributos
 	private JLabel lblmedman;
@@ -215,7 +215,10 @@ public class Buffer {
 		game.resetMegast24();
 		
 		//Otros
+		game.losseLife(vidas);
 		vidas--;
+		
+		//Comprobar vida
 		if (vidas==0) {
 			game.endMegast21();
 			game.endMegast22();
@@ -223,6 +226,7 @@ public class Buffer {
 			game.endMegast24();
 			medman.endMedman();
 			morir();
+			sleep(1000);
 			game.losse();
 		}
 	}
