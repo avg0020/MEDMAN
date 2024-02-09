@@ -9,10 +9,11 @@ public class Buffer {
 
 	// Atributos
 	private JLabel lblmedman;
-	private int xDirection, yDirection, xTablero = 7, yTablero = 8, contPremios=0;
+	private int xDirection, yDirection, xTablero = 7, yTablero = 8, contPremios;
 	private int []xPremios = new int[6];
 	private int []yPremios = new int[6];
 	private PruebaMove game;
+	private Medman medman;
 	private Semaphore semaforoMedman = new Semaphore(1);
 	private int vidas;
 	
@@ -34,7 +35,7 @@ public class Buffer {
 			// ------------------------------------------------------------------------------------------------------------------------------
 			{ 1, 0, 0, 0, 0, /**/ 0, 0, 0, 1, 0, /**/ 0, 0, 0, 0, 0, /**/ 0, 0, 0, 0, 0, /**/ 0, 0, 0, 0, 0, /**/ 0, 0, 0, 0, 0, /**/ 0, 0, 1, 0, 0, /**/ 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, /**/ 0, 1, 0, 0, 0, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 0, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 1, /**/ 1, 1, 1, 1 },
-			{ 1, 1, 1, 1, 1, /**/ 0, 1, 1, 3, 1, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 0, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 0, 1, /**/ 1, 1, 1, 1 },
+			{ 1, 1, 1, 1, 1, /**/ 0, 1, 1, 3, 1, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 0, 1, /**/ 1, 1, 1, 1 },
 			{ 1, 1, 1, 5, 0, /**/ 0, 1, 0, 1, 0, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 1, /**/ 1, 1, 1, 0, 0, /**/ 6, 1, 1, 1 },
 			{ 1, 1, 1, 1, 1, /**/ 0, 1, 0, 0, 0, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 0, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 0, 1, /**/ 1, 1, 1, 1 },
 			// ------------------------------------------------------------------------------------------------------------------------------
@@ -71,6 +72,7 @@ public class Buffer {
 			xPremios[i]=x;
 			yPremios[i]=y;
 		}
+		this.contPremios=0;
 	}
 	
 	// Métodos
@@ -188,38 +190,6 @@ public class Buffer {
 		semaforoMedman.release();
 	}
 	
-	// Coger el premio
-	public void cogerPremio() {
-		if (tablero[xTablero][yTablero] > 40) {
-			switch (tablero[xTablero][yTablero]) {
-			case 41:
-				game.getPanel().remove(game.getLblPremio1());
-				contPremios++;
-				break;
-			case 42:
-				game.getPanel().remove(game.getLblPremio2());
-				contPremios++;
-				break;
-			case 43:
-				game.getPanel().remove(game.getLblPremio3());
-				contPremios++;
-				break;
-			case 44:
-				game.getPanel().remove(game.getLblPremio4());
-				contPremios++;
-				break;
-			case 45:
-				game.getPanel().remove(game.getLblPremio5());
-				contPremios++;
-				break;
-			case 46:
-				game.getPanel().remove(game.getLblPremio6());
-				contPremios++;
-				break;				
-			}
-		}
-	}
-	
 	public boolean isPremio(Medgast medgast) {
 		if(tablero[medgast.getxTablero()][medgast.getyTablero()]>40) {
 			return true;
@@ -246,7 +216,58 @@ public class Buffer {
 		
 		//Otros
 		vidas--;
+		if (vidas==0) {
+			game.endMegast21();
+			game.endMegast22();
+			game.endMegast23();
+			game.endMegast24();
+			medman.endMedman();
+			morir();
+			game.losse();
+		}
 	}
+	
+	// Coger el premio
+		public void cogerPremio() throws InterruptedException {
+			if (tablero[xTablero][yTablero] > 40) {
+				switch (tablero[xTablero][yTablero]) {
+				case 41:
+					game.getPanel().remove(game.getLblPremio1());
+					contPremios++;
+					break;
+				case 42:
+					game.getPanel().remove(game.getLblPremio2());
+					contPremios++;
+					break;
+				case 43:
+					game.getPanel().remove(game.getLblPremio3());
+					contPremios++;
+					break;
+				case 44:
+					game.getPanel().remove(game.getLblPremio4());
+					contPremios++;
+					break;
+				case 45:
+					game.getPanel().remove(game.getLblPremio5());
+					contPremios++;
+					break;
+				case 46:
+					game.getPanel().remove(game.getLblPremio6());
+					contPremios++;
+					break;				
+				}
+				
+				if (contPremios==7) {
+					game.endMegast21();
+					game.endMegast22();
+					game.endMegast23();
+					game.endMegast24();
+					medman.endMedman();
+					morir();
+					game.win();
+				}
+			}
+		}
 	
 	// Getter y Setter
 	public int getXDirection() {
@@ -284,6 +305,13 @@ public class Buffer {
 	public void setxPremios(int[] xPremios) {
 		this.xPremios = xPremios;
 	}
-	
+
+	public Medman getMedman() {
+		return medman;
+	}
+
+	public void setMedman(Medman medman) {
+		this.medman = medman;
+	}
 	
 }

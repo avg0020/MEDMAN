@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -53,7 +55,7 @@ public class Inicio extends JFrame{
 		// ------------------------------------------------------ Frame ------------------------------------------------------
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1200, 900);
+		setBounds(100, 100, 1024, 819);
 		contentPane = new JPanel();
 		contentPane.setBackground(gris);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,7 +63,17 @@ public class Inicio extends JFrame{
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
         setFocusTraversalKeysEnabled(false);
+        contentPane = new JPanel() {
+			@Override
+			public void paint(Graphics g) {
+				Image bg = new ImageIcon(getClass().getResource("/Resources/fondoInicio.gif")).getImage();
+				g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+				setOpaque(false);
+				super.paint(g);
+			}
+		};
 		setContentPane(contentPane);
+		
 
 		// ------------------------------------------------------ Componentes ------------------------------------------------------
 
@@ -168,12 +180,12 @@ public class Inicio extends JFrame{
 		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setBounds(100, 100, 480, 480);
 		lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
-		contentPane.add(lblNewLabel);
+		//contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel1 = new JLabel();
 		lblNewLabel1.setBounds(300, 300, 480, 480);
 		lblNewLabel1.setIcon(new ImageIcon(getClass().getResource("/resources/hearth2.gif")));
-		contentPane.add(lblNewLabel1);
+		//contentPane.add(lblNewLabel1);
 		
 		// ------------------------------------------------------ Lógica ------------------------------------------------------
 		

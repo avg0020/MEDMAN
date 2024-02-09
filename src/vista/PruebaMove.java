@@ -17,8 +17,8 @@ public class PruebaMove extends JFrame implements KeyListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
-	
-	//Labels
+
+	// Labels
 	private JLabel lblMedman = new JLabel();
 	private JLabel lblMedgast21 = new JLabel();
 	private JLabel lblMedgast22 = new JLabel();
@@ -30,12 +30,14 @@ public class PruebaMove extends JFrame implements KeyListener {
 	private JLabel lblPremio4 = new JLabel();
 	private JLabel lblPremio5 = new JLabel();
 	private JLabel lblPremio6 = new JLabel();
+	private JLabel lblVictoria = new JLabel();
+	private JLabel lblDerrota = new JLabel();
 	private JLabel lblMapa = new JLabel();
-	
-	//Objetos
+
+	// Objetos
 	private Buffer buffer = new Buffer(lblMedman, this);
 	private Medman medman = new Medman(buffer);
-	private Medgast medgast21 = new Medgast(buffer,lblMedgast21,21);
+	private Medgast medgast21 = new Medgast(buffer, lblMedgast21, 21);
 	private Medgast medgast22 = new Medgast(buffer, lblMedgast22, 22);
 	private Medgast medgast23 = new Medgast(buffer, lblMedgast23, 23);
 	private Medgast medgast24 = new Medgast(buffer, lblMedgast24, 24);
@@ -67,6 +69,7 @@ public class PruebaMove extends JFrame implements KeyListener {
 		contentPane.setBackground(Color.BLACK);
 		addKeyListener(this);
 		setContentPane(contentPane);
+		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 
 		medman.start();
@@ -74,8 +77,8 @@ public class PruebaMove extends JFrame implements KeyListener {
 		medgast22.start();
 		medgast23.start();
 		medgast24.start();
-		
-		//Panel con el mapa
+
+		// Panel con el mapa
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setLayout(null);
@@ -85,50 +88,63 @@ public class PruebaMove extends JFrame implements KeyListener {
 		// Medman
 		lblMedman.setBounds(240, 210, 30, 30);
 		lblMedman.setIcon(new ImageIcon(getClass().getResource("/resources/medman.png")));
+		buffer.setMedman(medman);
 		panel.add(lblMedman);
 
 		// Medgasts
 		lblMedgast21.setBounds(570, 210, 30, 30);
 		lblMedgast21.setIcon(new ImageIcon(getClass().getResource("/resources/medgastO.png")));
 		panel.add(lblMedgast21);
-		
+
 		lblMedgast22.setBounds(540, 210, 30, 30);
 		lblMedgast22.setIcon(new ImageIcon(getClass().getResource("/resources/medgastR.png")));
 		panel.add(lblMedgast22);
-		
+
 		lblMedgast23.setBounds(540, 270, 30, 30);
 		lblMedgast23.setIcon(new ImageIcon(getClass().getResource("/resources/medgastB.png")));
 		panel.add(lblMedgast23);
-		
+
 		lblMedgast24.setBounds(570, 270, 30, 30);
 		lblMedgast24.setIcon(new ImageIcon(getClass().getResource("/resources/medgastP.png")));
 		panel.add(lblMedgast24);
-		
-		//Premios
-		lblPremio1.setBounds(buffer.getYPremios(0)*30, buffer.getXPremios(0)*30, 30, 30);
+
+		// Premios
+		lblPremio1.setBounds(buffer.getYPremios(0) * 30, buffer.getXPremios(0) * 30, 30, 30);
 		lblPremio1.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio1);
-		
-		lblPremio2.setBounds(buffer.getYPremios(1)*30, buffer.getXPremios(1)*30, 30, 30);
+
+		lblPremio2.setBounds(buffer.getYPremios(1) * 30, buffer.getXPremios(1) * 30, 30, 30);
 		lblPremio2.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio2);
-		
-		lblPremio3.setBounds(buffer.getYPremios(2)*30, buffer.getXPremios(2)*30, 30, 30);
+
+		lblPremio3.setBounds(buffer.getYPremios(2) * 30, buffer.getXPremios(2) * 30, 30, 30);
 		lblPremio3.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio3);
-		
-		lblPremio4.setBounds(buffer.getYPremios(3)*30, buffer.getXPremios(3)*30, 30, 30);
+
+		lblPremio4.setBounds(buffer.getYPremios(3) * 30, buffer.getXPremios(3) * 30, 30, 30);
 		lblPremio4.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio4);
-		
-		lblPremio5.setBounds(buffer.getYPremios(4)*30, buffer.getXPremios(4)*30, 30, 30);
+
+		lblPremio5.setBounds(buffer.getYPremios(4) * 30, buffer.getXPremios(4) * 30, 30, 30);
 		lblPremio5.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio5);
-		
-		lblPremio6.setBounds(buffer.getYPremios(5)*30, buffer.getXPremios(5)*30, 30, 30);
+
+		lblPremio6.setBounds(buffer.getYPremios(5) * 30, buffer.getXPremios(5) * 30, 30, 30);
 		lblPremio6.setIcon(new ImageIcon(getClass().getResource("/resources/diploma.png")));
 		panel.add(lblPremio6);
+
+		// Victoria derrota
+		lblVictoria.setBounds(100, 100, 480, 460);
+		lblVictoria.setIcon(new ImageIcon(getClass().getResource("/resources/victoria.gif")));
+		lblVictoria.setVisible(false);
+		panel.add(lblVictoria);
 		
+		lblDerrota.setBounds(100, 100, 480, 460);
+		lblDerrota.setIcon(new ImageIcon(getClass().getResource("/resources/derrota.gif")));
+		lblDerrota.setVisible(false);
+		panel.add(lblDerrota);
+
+
 		// Mapa
 		lblMapa.setBounds(0, 0, 1170, 510);
 		lblMapa.setIcon(new ImageIcon(getClass().getResource("/resources/mapa.jpg")));
@@ -224,7 +240,7 @@ public class PruebaMove extends JFrame implements KeyListener {
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
-	
+
 	public Medgast getMedgast21() {
 		return medgast21;
 	}
@@ -248,7 +264,7 @@ public class PruebaMove extends JFrame implements KeyListener {
 		medgast21.setxTablero(-1);
 		medgast21.setyTablero(-1);
 	}
-	
+
 	public void resetMegast22() {
 		lblMedgast22.setBounds(540, 210, 30, 30);
 		medgast22.setFirstTurn(true);
@@ -256,7 +272,7 @@ public class PruebaMove extends JFrame implements KeyListener {
 		medgast22.setxTablero(-1);
 		medgast22.setyTablero(-1);
 	}
-	
+
 	public void resetMegast23() {
 		lblMedgast23.setBounds(540, 270, 30, 30);
 		medgast23.setFirstTurn(true);
@@ -264,7 +280,7 @@ public class PruebaMove extends JFrame implements KeyListener {
 		medgast23.setxTablero(-1);
 		medgast23.setyTablero(-1);
 	}
-	
+
 	public void resetMegast24() {
 		lblMedgast24.setBounds(570, 270, 30, 30);
 		medgast24.setFirstTurn(true);
@@ -272,5 +288,30 @@ public class PruebaMove extends JFrame implements KeyListener {
 		medgast24.setxTablero(-1);
 		medgast24.setyTablero(-1);
 	}
+
+	public void endMegast21() {
+		medgast21.setPlaying(false);
+	}
+
+	public void endMegast22() {
+		medgast22.setPlaying(false);
+	}
+
+	public void endMegast23() {
+		medgast23.setPlaying(false);
+	}
+
+	public void endMegast24() {
+		medgast24.setPlaying(false);
+	}
 	
+	public void win() {
+		lblVictoria.setVisible(true);
+		lblVictoria.setComponentZOrder(lblVictoria, 1);
+	}
+	
+	public void losse() {
+		lblDerrota.setVisible(true);
+		lblDerrota.setComponentZOrder(lblDerrota, 1);
+	}
 }

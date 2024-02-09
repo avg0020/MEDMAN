@@ -8,6 +8,7 @@ public class Medgast extends Thread {
 	private Buffer buffer;
 	private JLabel lbl;
 	private boolean isFirstTurn;
+	private boolean isPlaying;
 
 	// Constructores
 	public Medgast(Buffer buffer, JLabel lbl, int type) {
@@ -16,12 +17,13 @@ public class Medgast extends Thread {
 		this.lbl = lbl;
 		this.type = type;
 		this.isFirstTurn = true;
+		this.isPlaying = true;
 	}
 	
 	// Métodos
 	@Override
 	public void run() {
-		while (true) {
+		while (isPlaying) {
 			try {
 				if (isFirstTurn) {
 					movimientoSalida();
@@ -81,6 +83,14 @@ public class Medgast extends Thread {
 
 	public void setFirstTurn(boolean isFirstTurn) {
 		this.isFirstTurn = isFirstTurn;
+	}
+
+	public boolean isPlaying() {
+		return isPlaying;
+	}
+
+	public void setPlaying(boolean isPlaying) {
+		this.isPlaying = isPlaying;
 	}
 
 	public void movimientoSalida() {
