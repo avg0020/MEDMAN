@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
-public class Carga extends JFrame implements Runnable{
+public class Load extends JFrame implements Runnable{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -20,7 +20,7 @@ public class Carga extends JFrame implements Runnable{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Carga frame = new Carga();
+					Load frame = new Load();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +32,7 @@ public class Carga extends JFrame implements Runnable{
 	/**
 	 * Create the frame.
 	 */
-	public Carga() {
+	public Load() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 500, 304);
 		setLocationRelativeTo(null);

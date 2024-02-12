@@ -12,7 +12,7 @@ public class Buffer extends Thread{
 	private int xDirection, yDirection, xTablero = 7, yTablero = 8, contPremios;
 	private int []xPremios = new int[6];
 	private int []yPremios = new int[6];
-	private PruebaMove game;
+	private Game1P game;
 	private Medman medman;
 	private Semaphore semaforoMedman = new Semaphore(1);
 	private int vidas;
@@ -49,7 +49,7 @@ public class Buffer extends Thread{
 			{ 1, 1, 1, 1, 1, /**/ 1, 1, 1, 1, 1, /**/ 1, 1, 1, 1, 1, /**/ 1, 1, 1, 1, 1, /**/ 1, 1, 1, 1, 1, /**/ 1, 1, 1, 1, 1, /**/ 1, 1, 1, 1, 1, /**/ 1, 1, 1, 1 } };
 
 	// Constructor
-	public Buffer(JLabel lbl, PruebaMove game) {
+	public Buffer(JLabel lbl, Game1P game) {
 		this.lblmedman = lbl;
 		this.game = game;
 		this.vidas = 3;
@@ -190,14 +190,7 @@ public class Buffer extends Thread{
 		semaforoMedman.release();
 	}
 	
-	public boolean isPremio(Medgast medgast) {
-		if(tablero[medgast.getxTablero()][medgast.getyTablero()]>40) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
+	//Peder vida
 	public void morir() throws InterruptedException {
 		//Medman
 		tablero[xTablero][yTablero]=0;
@@ -231,43 +224,70 @@ public class Buffer extends Thread{
 		}
 	}
 	
+	//Victoria
+	public void ganar() throws InterruptedException {
+		//Medman
+		tablero[xTablero][yTablero]=0;
+		xTablero=7;
+		yTablero=8;
+		tablero[7][8]=3;
+		xDirection=0;
+		yDirection=0;
+		lblmedman.setLocation(240, 210);
+		
+		//Medgast
+		game.resetMegast21();
+		game.resetMegast22();
+		game.resetMegast23();
+		game.resetMegast24();
+	}
+	
 	// Coger el premio
 		public void cogerPremio() throws InterruptedException {
+			
 			if (tablero[xTablero][yTablero] > 40) {
+				semaforoMedman.acquire();
 				switch (tablero[xTablero][yTablero]) {
 				case 41:
 					game.getPanel().remove(game.getLblPremio1());
+					tablero[xTablero][yTablero]=0;
 					contPremios++;
 					break;
 				case 42:
 					game.getPanel().remove(game.getLblPremio2());
 					contPremios++;
+					tablero[xTablero][yTablero]=0;
 					break;
 				case 43:
 					game.getPanel().remove(game.getLblPremio3());
 					contPremios++;
+					tablero[xTablero][yTablero]=0;
 					break;
 				case 44:
 					game.getPanel().remove(game.getLblPremio4());
 					contPremios++;
+					tablero[xTablero][yTablero]=0;
 					break;
 				case 45:
 					game.getPanel().remove(game.getLblPremio5());
 					contPremios++;
+					tablero[xTablero][yTablero]=0;
 					break;
 				case 46:
 					game.getPanel().remove(game.getLblPremio6());
 					contPremios++;
+					tablero[xTablero][yTablero]=0;
 					break;				
 				}
+				semaforoMedman.release();
 				
-				if (contPremios==7) {
+				if (contPremios==6) {
 					game.endMegast21();
 					game.endMegast22();
 					game.endMegast23();
 					game.endMegast24();
 					medman.endMedman();
-					morir();
+					ganar();
 					game.win();
 				}
 			}

@@ -11,8 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 
-public class PruebaMove extends JFrame implements KeyListener {
+public class Game1P extends JFrame implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -41,8 +45,11 @@ public class PruebaMove extends JFrame implements KeyListener {
 	private JLabel lblVictoria = new JLabel();
 	private JLabel lblDerrota = new JLabel();
 	
-	//Mapa
+	//Mapa 
 	private JLabel lblMapa = new JLabel();
+	
+	//Pausa
+	private JLabel lblPause = new JLabel();
 	
 	//Vida
 	private JLabel lblVida1 = new JLabel();
@@ -64,7 +71,7 @@ public class PruebaMove extends JFrame implements KeyListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PruebaMove frame = new PruebaMove();
+					Game1P frame = new Game1P();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -76,22 +83,24 @@ public class PruebaMove extends JFrame implements KeyListener {
 	/**
 	 * Create the frame.
 	 */
-	public PruebaMove() {
+	public Game1P() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1186, 900);
-		contentPane = new JPanel();
+		contentPane = new JPanel() {
+			@Override
+			public void paint(Graphics g) {
+				Image bg = new ImageIcon(getClass().getResource("/Resources/fondoInicio.gif")).getImage();
+				g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+				setOpaque(false);
+				super.paint(g);
+			}
+		};
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(Color.BLACK);
 		addKeyListener(this);
 		setContentPane(contentPane);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-
-		medman.start();
-		medgast21.start();
-		medgast22.start();
-		medgast23.start();
-		medgast24.start();
 
 		// Panel con el mapa
 		panel = new JPanel();
@@ -160,22 +169,41 @@ public class PruebaMove extends JFrame implements KeyListener {
 		panel.add(lblDerrota);
 		
 		//Vidas
-		lblVida1.setBounds(100, 100, 60, 60);
+		JPanel panelVidas = new JPanel();
+		panelVidas.setBorder(new LineBorder(new Color(255, 0, 0), 3));
+		panelVidas.setBackground(Color.BLACK);
+		panelVidas.setLayout(null);
+		panelVidas.setBounds(468, 90, 250, 100);
+		contentPane.add(panelVidas);
+		
+		lblVida1.setBounds(10, 20, 60, 60);
 		lblVida1.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
-		contentPane.add(lblVida1);
+		panelVidas.add(lblVida1);
 		
-		lblVida2.setBounds(160, 100, 60, 60);
+		lblVida2.setBounds(100, 20, 60, 60);
 		lblVida2.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
-		contentPane.add(lblVida2);
+		panelVidas.add(lblVida2);
 		
-		lblVida3.setBounds(220, 100, 60, 60);
+		lblVida3.setBounds(190, 20, 60, 60);
 		lblVida3.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
-		contentPane.add(lblVida3);
+		panelVidas.add(lblVida3);
 
 		// Mapa
 		lblMapa.setBounds(0, 0, 1170, 510);
 		lblMapa.setIcon(new ImageIcon(getClass().getResource("/resources/mapa.jpg")));
 		panel.add(lblMapa);
+		
+		//Pausa
+		lblPause.setBounds(443, 400, 300, 100);
+		lblPause.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPause.setForeground(new Color(255, 255, 255));
+		lblPause.setBorder(new LineBorder(new Color(255, 0, 0), 5));
+		lblPause.setBackground(Color.BLACK);
+		lblPause.setText("Pulse space para comenzar");
+		lblPause.setFont(new Font("MingLiU-ExtB", Font.PLAIN, 19));
+		lblPause.setOpaque(true);
+		contentPane.add(lblPause);
+		contentPane.setComponentZOrder(lblPause, 0);
 	}
 
 	@Override
@@ -197,6 +225,15 @@ public class PruebaMove extends JFrame implements KeyListener {
 			buffer.setXDirection(0);
 			buffer.setYDirection(-30);
 			break;
+		case ' ':
+			lblPause.setVisible(false);
+			buffer.setXDirection(0);
+			buffer.setYDirection(0);
+			medman.start();
+			medgast21.start();
+			medgast22.start();
+			medgast23.start();
+			medgast24.start();
 		}
 	}
 
@@ -333,13 +370,15 @@ public class PruebaMove extends JFrame implements KeyListener {
 	}
 	
 	public void win() {
-		lblVictoria.setVisible(true);
-		lblVictoria.setComponentZOrder(lblVictoria, 1);
+		DVictory v = new DVictory();
+		v.setVisible(true);
+		v.setModal(true);
 	}
 	
 	public void losse() {
-		lblDerrota.setVisible(true);
-		lblDerrota.setComponentZOrder(lblDerrota, 1);
+		DGameOver v = new DGameOver();
+		v.setVisible(true);
+		v.setModal(true);
 	}
 	
 	public void losseLife(int vida) {
