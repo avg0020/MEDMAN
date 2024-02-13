@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,7 +30,8 @@ public class DVictory extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private Inicio grandparent;
 	private Game1P parent;
-
+	private int dificulty;
+	
 	// Fonts
 	private Font font_25 = new Font("Consolas", Font.PLAIN, 25);
 	private Font font_20 = new Font("Consolas", Font.PLAIN, 20);
@@ -38,21 +42,22 @@ public class DVictory extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			DVictory dialog = new DVictory(null, null);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			DVictory dialog = new DVictory(null, null);
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public DVictory(Inicio grandparent, Game1P parent) {
+	public DVictory(Inicio grandparent, Game1P parent, int dificulty) {
 		this.grandparent = grandparent;
+		this.dificulty = dificulty;
 		this.parent = parent;
 
 		setBounds(0, 0, 520, 760);
@@ -204,6 +209,7 @@ public class DVictory extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				savePoints();
 				grandparent.setVisible(true);
 				parent.dispose();
 				dispose();
@@ -212,5 +218,32 @@ public class DVictory extends JDialog {
 		btnSave.setFocusable(false);
 		contentPanel.add(btnSave);
 	}
+	
+	public void savePoints() {
+		String text = parent.getUser().replaceAll("\\s", "")+ ":" + parent.getPoints()+ "\n";
+		String filepath = "";
+		// Ruta del archivo donde se guardará el texto
+		switch (dificulty) {
+		case 0:
+			filepath = "Easy.txt";
+			break;
+		case 1:
+			filepath = "Medium.txt";
+			break;
+		case 2:
+			filepath = "Hard.txt";
+			break;
+		}
 
+		// Usamos un try-with-resources para asegurarnos de que el BufferedWriter se
+		// cierre correctamente
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath,true))) {
+			// Escribimos el texto en el archivo
+			writer.write(text);
+		} catch (IOException e) {
+			// Manejamos cualquier excepción de entrada/salida (IOException) que pueda
+			// ocurrir
+			e.printStackTrace();
+		}
+	}
 }

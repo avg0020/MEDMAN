@@ -30,7 +30,6 @@ public class DDificulty extends JDialog {
 	private Color B = new Color(15, 0, 152);
 
 	// Fonts
-	private Font font_69 = new Font("Consolas", Font.PLAIN, 69);
 	private Font font_35 = new Font("Consolas", Font.PLAIN, 35);
 	private Font font_30 = new Font("Consolas", Font.PLAIN, 30);
 
@@ -59,9 +58,8 @@ public class DDificulty extends JDialog {
 		this.parent = parent;
 
 		// ------------------------------------------------------Dialog------------------------------------------------------
-		setBounds(0, 0, 480, 580);
+		setBounds(719, 346, 480, 480);
 		setResizable(false);
-		setLocationRelativeTo(null);
 		setUndecorated(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,14 +71,14 @@ public class DDificulty extends JDialog {
 		JLabel lblTitulo = new JLabel("Dificultad");
 		lblTitulo.setBounds(0, 20, 480, 100);
 		lblTitulo.setForeground(Color.WHITE);
-		lblTitulo.setFont(font_69);
+		lblTitulo.setFont(font_35);
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblTitulo);
 
 		// ------------------------------------------------------Botones------------------------------------------------------
 
 		// Play
-		int xBtnEasy = 140, yBtnEasy = 200;
+		int xBtnEasy = 140, yBtnEasy = 125;
 		int wBtnEasy = 200, hBtnEasy = 50;
 		JButton btnEasy = new JButton("Facil");
 		btnEasy.setBounds(xBtnEasy, yBtnEasy, wBtnEasy, hBtnEasy);
@@ -138,7 +136,7 @@ public class DDificulty extends JDialog {
 		contentPanel.add(btnEasy);
 
 		// Medium
-		int xBtnMedium = 142, yBtnMedium = 300;
+		int xBtnMedium = 142, yBtnMedium = 225;
 		int wBtnMedium = 200, hBtnMedium = 50;
 		JButton btnMedium = new JButton("Media");
 		btnMedium.setBounds(xBtnMedium, yBtnMedium, wBtnMedium, hBtnMedium);
@@ -196,7 +194,7 @@ public class DDificulty extends JDialog {
 		contentPanel.add(btnMedium);
 
 		// Hard
-		int xBtnHard = 142, yBtnHard = 400;
+		int xBtnHard = 142, yBtnHard = 325;
 		int wBtnHard = 200, hBtnHard = 50;
 		JButton btnHard = new JButton("Dificil");
 		btnHard.setBounds(xBtnHard, yBtnHard, wBtnHard, hBtnHard);

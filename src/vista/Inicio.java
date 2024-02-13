@@ -19,6 +19,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
@@ -42,7 +45,7 @@ public class Inicio extends JFrame {
 	private Font font_69 = new Font("Consolas", Font.PLAIN, 69);
 	private Font font_35 = new Font("Consolas", Font.PLAIN, 35);
 	private Font font_30 = new Font("Consolas", Font.PLAIN, 30);
-	private Font font_20= new Font("Consolas", Font.PLAIN, 20);
+	private Font font_20 = new Font("Consolas", Font.PLAIN, 20);
 
 	// Boders
 	private Border borderR = new LineBorder(R, 2);
@@ -60,12 +63,19 @@ public class Inicio extends JFrame {
 	private JLabel lblUser;
 	private JLabel lblU;
 
+	// Titulos
+	private Titulo u;
+	private Titulo t;
+
 	// Botones
 	private JButton btnPlay;
 	private JButton btnDificulty;
 	private JButton btnExit;
+	private JButton btnChangeUser;
+	private JButton btnPoints;
 
 	// Otros
+	private int dificulty;
 	private int speed;
 	private ImageIcon fondo;
 
@@ -92,7 +102,8 @@ public class Inicio extends JFrame {
 		this.frame = this;
 		this.fondo = new ImageIcon(getClass().getResource("/resources/fondoInicio.gif"));
 		this.speed = 100;
-		
+		this.dificulty = 1;
+
 		// ------------------------------------------------------Frame------------------------------------------------------
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1024, 819);
@@ -136,26 +147,26 @@ public class Inicio extends JFrame {
 		panelMenu.setLayout(null);
 		contentPane.add(panelMenu);
 		contentPane.setComponentZOrder(panelMenu, 0);
-	
+
 		// ------------------------------------------------------Usuario------------------------------------------------------
 		lblU = new JLabel();
-		lblU.setBounds(60, 160, 70, 100);
+		lblU.setBounds(100, 160, 70, 100);
 		lblU.setForeground(color);
 		lblU.setFont(font_20);
 		lblU.setText("USER: ");
 		lblU.setHorizontalAlignment(SwingConstants.CENTER);
 		panelMenu.add(lblU);
-		
+
 		lblUser = new JLabel();
-		lblUser.setBounds(130, 160, 300, 100);
+		lblUser.setBounds(170, 160, 300, 100);
 		lblUser.setForeground(color);
 		lblUser.setFont(font_20);
-		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUser.setHorizontalAlignment(SwingConstants.LEFT);
 		panelMenu.add(lblUser);
 
-		Titulo u = new Titulo(lblUser, "U N K N O W N 2 5 4 8 6 8 ");
+		u = new Titulo(lblUser, generarUsuario(), 10000, 10);
 		u.start();
-		
+
 		// ------------------------------------------------------Titulo------------------------------------------------------
 		lblTitulo = new JLabel();
 		lblTitulo.setBounds(20, 40, 520, 100);
@@ -164,7 +175,7 @@ public class Inicio extends JFrame {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		panelMenu.add(lblTitulo);
 
-		Titulo t = new Titulo(lblTitulo, "M E D M A N ");
+		t = new Titulo(lblTitulo, "M E D M A N ", 5000, 25);
 		t.start();
 
 		// ------------------------------------------------------Botones------------------------------------------------------
@@ -221,7 +232,7 @@ public class Inicio extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Game1P g = new Game1P(frame,fondo, color, border, speed);
+				Game1P g = new Game1P(frame, fondo, color, border, speed, dificulty);
 				g.setVisible(true);
 				frame.setVisible(false);
 			}
@@ -287,8 +298,66 @@ public class Inicio extends JFrame {
 		});
 		panelMenu.add(btnDificulty);
 
+		// Dificultad
+		int xBtnPoints = 162, yBtnPoints = 560;
+		int wBtnPoints = 200, hBtnPoints = 50;
+		btnPoints = new JButton("Historial");
+		btnPoints.setBounds(xBtnPoints, yBtnPoints, wBtnPoints, hBtnPoints);
+		btnPoints.setFont(font_30);
+		btnPoints.setForeground(color);
+		btnPoints.setBackground(Color.BLACK);
+		btnPoints.setBorder(border);
+		btnPoints.setFocusPainted(false);
+		btnPoints.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnPoints.setLocation(xBtnPoints, yBtnPoints);
+				btnPoints.setSize(wBtnPoints, hBtnPoints);
+				btnPoints.setFont(font_30);
+				btnPoints.setForeground(color);
+				btnPoints.setBackground(Color.BLACK);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnPoints.setLocation(xBtnPoints - 10, yBtnPoints - 5);
+				btnPoints.setSize(wBtnPoints + 20, hBtnPoints + 10);
+				btnPoints.setFont(font_35);
+				btnPoints.setForeground(Color.BLACK);
+				btnPoints.setBackground(color);
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		btnPoints.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Records r = new Records(frame, dificulty);
+				r.setVisible(true);
+			}
+		});
+		panelMenu.add(btnPoints);
+
 		// Salir
-		int xBtnExit = 162, yBtnExit = 560;
+		int xBtnExit = 162, yBtnExit = 660;
 		int wBtnExit = 200, hBtnExit = 50;
 		btnExit = new JButton("Salir");
 		btnExit.setBounds(xBtnExit, yBtnExit, wBtnExit, hBtnExit);
@@ -344,12 +413,31 @@ public class Inicio extends JFrame {
 			}
 		});
 		panelMenu.add(btnExit);
+
+		btnChangeUser = new JButton();
+		btnChangeUser.setBounds(60, 190, 30, 30);
+		btnChangeUser.setIcon(new ImageIcon(getClass().getResource("/Resources/editG.png")));
+		btnChangeUser.setBackground(Color.BLACK);
+		btnChangeUser.setBorder(null);
+		btnChangeUser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DChangeUser u = new DChangeUser(frame, color, border);
+				u.setModal(true);
+				u.setVisible(true);
+			}
+		});
+		btnChangeUser.setFocusPainted(false);
+		panelMenu.add(btnChangeUser);
 	}
 
 	// ------------------------------------------------------Métodos------------------------------------------------------
 
 	// Cambiar a facil
 	public void setEasy() {
+		// Dificultad
+		dificulty = 0;
 
 		// Fondos
 		lblFondoG.setVisible(false);
@@ -365,7 +453,6 @@ public class Inicio extends JFrame {
 		lblTitulo.setForeground(color);
 		lblU.setForeground(color);
 		lblUser.setForeground(color);
-		
 
 		// Botones
 		btnPlay.setForeground(color);
@@ -374,6 +461,9 @@ public class Inicio extends JFrame {
 		btnDificulty.setBorder(border);
 		btnExit.setForeground(color);
 		btnExit.setBorder(border);
+		btnPoints.setForeground(color);
+		btnPoints.setBorder(border);
+		btnChangeUser.setIcon(new ImageIcon(getClass().getResource("/Resources/editB.png")));
 
 		// Velocidad
 		speed = 150;
@@ -381,6 +471,8 @@ public class Inicio extends JFrame {
 
 	// Cambiar a medio
 	public void setMedium() {
+		// Dificultad
+		dificulty = 1;
 
 		// Fondos
 		lblFondoG.setVisible(true);
@@ -404,6 +496,9 @@ public class Inicio extends JFrame {
 		btnDificulty.setBorder(border);
 		btnExit.setForeground(color);
 		btnExit.setBorder(border);
+		btnPoints.setForeground(color);
+		btnPoints.setBorder(border);
+		btnChangeUser.setIcon(new ImageIcon(getClass().getResource("/Resources/editG.png")));
 
 		// Velocidad
 		speed = 100;
@@ -411,6 +506,8 @@ public class Inicio extends JFrame {
 
 	// Cambiar a dificil
 	public void setHard() {
+		// Dificultad
+		dificulty = 2;
 
 		// Fondos
 		lblFondoG.setVisible(false);
@@ -434,13 +531,48 @@ public class Inicio extends JFrame {
 		btnDificulty.setBorder(border);
 		btnExit.setForeground(color);
 		btnExit.setBorder(border);
+		btnPoints.setForeground(color);
+		btnPoints.setBorder(border);
+		btnChangeUser.setIcon(new ImageIcon(getClass().getResource("/Resources/editR.png")));
 
 		// Velocidad
 		speed = 50;
 	}
-	
+
 	public void endHilos() {
 		u.setFinish(true);
 		t.setFinish(true);
+	}
+
+	public String generarUsuario() {
+		String user = "U N K N O W N ";
+
+		// Obtener la fecha y hora actual del sistema
+		LocalDateTime fechaHoraActual = LocalDateTime.now();
+
+		// Obtener la cantidad de nanosegundos desde el inicio del sistema
+		String nanosegundos = String.valueOf(fechaHoraActual.getNano());
+
+		for (int i = nanosegundos.length() - 6; i < nanosegundos.length(); i++) {
+			user += nanosegundos.charAt(i) + " ";
+		}
+
+		return user;
+	}
+
+	public Titulo getU() {
+		return u;
+	}
+
+	public void setU(Titulo u) {
+		this.u = u;
+	}
+
+	public JLabel getLblUser() {
+		return lblUser;
+	}
+
+	public void setLblUser(JLabel lblUser) {
+		this.lblUser = lblUser;
 	}
 }

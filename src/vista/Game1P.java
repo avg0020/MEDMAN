@@ -34,6 +34,7 @@ public class Game1P extends JFrame implements KeyListener {
 	private Color color;
 
 	// Fonts
+	private Font font_15 = new Font("Consolas", Font.PLAIN, 15);
 	private Font font_20 = new Font("Consolas", Font.PLAIN, 20);
 	private Font font_25 = new Font("Consolas", Font.PLAIN, 25);
 	private Font font_50 = new Font("Consolas", Font.PLAIN, 50);
@@ -90,31 +91,39 @@ public class Game1P extends JFrame implements KeyListener {
 	private Medgast medgast23 = new Medgast(buffer, lblMedgast23, 23);
 	private Medgast medgast24 = new Medgast(buffer, lblMedgast24, 24);
 	
-	//Puntos
+	// Nombre
+	private Titulo u;
+	private JLabel lblUser;
+	private String user;
+	
+	// Puntos
 	private int points;
 	JLabel lblPoints;
+	
+	//Dificultad
+	private int dificulty;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Game1P frame = new Game1P(null, new ImageIcon(getClass().getResource("/Resources/fondoInicio.gif")),
-							new Color(35, 146, 23), new LineBorder(new Color(35, 146, 23), 2), 150);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Game1P frame = new Game1P(null, new ImageIcon(getClass().getResource("/Resources/fondoInicio.gif")),
+//							new Color(35, 146, 23), new LineBorder(new Color(35, 146, 23), 2), 150);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Game1P(Inicio parent, ImageIcon fondo, Color color, Border border, int speed) {
+	public Game1P(Inicio parent, ImageIcon fondo, Color color, Border border, int speed, int dificulty) {
 		this.frame = this;
 		this.parent = parent;
 		this.fondo = fondo;
@@ -122,6 +131,10 @@ public class Game1P extends JFrame implements KeyListener {
 		this.border = border;
 		this.speed = speed;
 		this.points = 0;
+		this.dificulty = dificulty;
+		
+		this.user = parent.getU().getTitulo();
+		
 		medgast21.setSpeed(speed);
 		medgast22.setSpeed(speed);
 		medgast23.setSpeed(speed);
@@ -232,7 +245,25 @@ public class Game1P extends JFrame implements KeyListener {
 		lblVida3.setBounds(190, 20, 60, 60);
 		lblVida3.setIcon(new ImageIcon(getClass().getResource("/resources/hearth.gif")));
 		panelVidas.add(lblVida3);
-
+		
+		// Nombre
+		JPanel panelUser = new JPanel();
+		panelUser.setBorder(border);
+		panelUser.setBackground(Color.BLACK);
+		panelUser.setLayout(null);
+		panelUser.setBounds(468, 35, 250, 50);
+		contentPane.add(panelUser);
+		
+		lblUser = new JLabel();
+		lblUser.setBounds(10, 10, 230, 30);
+		lblUser.setForeground(color);
+		lblUser.setFont(font_15);
+		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
+		panelUser.add(lblUser);
+		
+		u = new Titulo(lblUser, user, 10000, 10);
+		u.start();
+		
 		// Mapa
 		lblMapa.setBounds(0, 0, 1170, 510);
 		lblMapa.setIcon(new ImageIcon(getClass().getResource("/resources/mapa.jpg")));
@@ -572,6 +603,14 @@ public class Game1P extends JFrame implements KeyListener {
 		lblPoints.setText(String.valueOf(points));
 	}
 	
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
 	public int getPoints() {
 		return points;
 	}
@@ -581,13 +620,13 @@ public class Game1P extends JFrame implements KeyListener {
 	}
 
 	public void win() {
-		DVictory v = new DVictory(parent, frame);
+		DVictory v = new DVictory(parent, frame, dificulty);
 		v.setVisible(true);
 		v.setModal(true);
 	}
 
 	public void losse() {
-		DGameOver v = new DGameOver(parent, frame);
+		DGameOver v = new DGameOver(parent, frame, dificulty);
 		v.setVisible(true);
 		v.setModal(true);
 	}
@@ -613,5 +652,6 @@ public class Game1P extends JFrame implements KeyListener {
 		medgast23.setFinish(true);
 		medgast24.setFinish(true);
 		timer.setFinish(true);
+		u.setFinish(true);
 	}
 }
