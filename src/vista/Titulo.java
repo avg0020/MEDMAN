@@ -7,17 +7,19 @@ import javax.swing.JLabel;
 public class Titulo extends Thread {
 
 	// Atributos
+	private String nums;
 	private String titulo;
-	private String medman;
 	private int pos;
 	private JLabel lblTitulo;
+	private boolean finish;
 
 	// Constructores
-	public Titulo(JLabel lbltitulo) {
+	public Titulo(JLabel lbltitulo, String titulo) {
 		super();
 		this.lblTitulo = lbltitulo;
-		this.titulo = "";
-		this.medman = "M E D M A N ";
+		this.nums = "";
+		this.titulo = titulo;
+		this.finish = false;
 	}
 
 	// Métodos
@@ -27,17 +29,17 @@ public class Titulo extends Thread {
 		super.run();
 		this.pos = 0;
 		try {
-			while (true) {
+			while (finish==false) {
 				for (int i = 0; i < 25; i++) {
-					for (int j = pos; j < 6; j++) {
-						titulo += (int) Math.round(Math.random() * 9)+" ";
+					for (int j = pos; j < titulo.length()/2; j++) {
+						nums += (int) Math.round(Math.random() * 9)+" ";
 					}
-					lblTitulo.setText(medman.substring(0, pos*2)+titulo);
-					titulo="";
+					lblTitulo.setText(titulo.substring(0, pos*2)+nums);
+					nums="";
 					sleep(50);
 				}
 				
-				if (pos==6) {
+				if (pos==titulo.length()/2) {
 					pos=0;
 					sleep(5000);
 				}else {
@@ -47,6 +49,14 @@ public class Titulo extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isFinish() {
+		return finish;
+	}
+
+	public void setFinish(boolean finish) {
+		this.finish = finish;
 	}
 
 }

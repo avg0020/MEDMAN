@@ -1,5 +1,6 @@
 package vista;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -29,31 +30,45 @@ public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private Inicio frame;
 
 	// Colores
 	private Color R = new Color(206, 0, 26);
 	private Color G = new Color(35, 146, 23);
 	private Color B = new Color(15, 0, 152);
+	private Color color = G;
 
 	// Fonts
 	private Font font_69 = new Font("Consolas", Font.PLAIN, 69);
 	private Font font_35 = new Font("Consolas", Font.PLAIN, 35);
 	private Font font_30 = new Font("Consolas", Font.PLAIN, 30);
+	private Font font_20= new Font("Consolas", Font.PLAIN, 20);
 
 	// Boders
 	private Border borderR = new LineBorder(R, 2);
 	private Border borderB = new LineBorder(B, 2);
 	private Border borderG = new LineBorder(G, 2);
+	private Border border = borderG;
 
 	// Fondos
 	private JLabel lblFondoG;
 	private JLabel lblFondoR;
 	private JLabel lblFondoB;
-	
-	//Otros
-	private int dificulty;
-	
-	
+
+	// Labels
+	private JLabel lblTitulo;
+	private JLabel lblUser;
+	private JLabel lblU;
+
+	// Botones
+	private JButton btnPlay;
+	private JButton btnDificulty;
+	private JButton btnExit;
+
+	// Otros
+	private int speed;
+	private ImageIcon fondo;
+
 	/**
 	 * Launch the application.
 	 */
@@ -74,7 +89,10 @@ public class Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public Inicio() {
-
+		this.frame = this;
+		this.fondo = new ImageIcon(getClass().getResource("/resources/fondoInicio.gif"));
+		this.speed = 100;
+		
 		// ------------------------------------------------------Frame------------------------------------------------------
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1024, 819);
@@ -83,12 +101,10 @@ public class Inicio extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		setFocusTraversalKeysEnabled(false);
 		setUndecorated(true);
 		setContentPane(contentPane);
 
 		// ------------------------------------------------------Fondos------------------------------------------------------
-
 		// Verde
 		lblFondoG = new JLabel();
 		lblFondoG.setBounds(0, 0, 1024, 819);
@@ -120,16 +136,35 @@ public class Inicio extends JFrame {
 		panelMenu.setLayout(null);
 		contentPane.add(panelMenu);
 		contentPane.setComponentZOrder(panelMenu, 0);
+	
+		// ------------------------------------------------------Usuario------------------------------------------------------
+		lblU = new JLabel();
+		lblU.setBounds(60, 160, 70, 100);
+		lblU.setForeground(color);
+		lblU.setFont(font_20);
+		lblU.setText("USER: ");
+		lblU.setHorizontalAlignment(SwingConstants.CENTER);
+		panelMenu.add(lblU);
+		
+		lblUser = new JLabel();
+		lblUser.setBounds(130, 160, 300, 100);
+		lblUser.setForeground(color);
+		lblUser.setFont(font_20);
+		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
+		panelMenu.add(lblUser);
 
+		Titulo u = new Titulo(lblUser, "U N K N O W N 2 5 4 8 6 8 ");
+		u.start();
+		
 		// ------------------------------------------------------Titulo------------------------------------------------------
-		JLabel lblTitulo = new JLabel();
-		lblTitulo.setBounds(20, 20, 520, 100);
-		lblTitulo.setForeground(G);
+		lblTitulo = new JLabel();
+		lblTitulo.setBounds(20, 40, 520, 100);
+		lblTitulo.setForeground(color);
 		lblTitulo.setFont(font_69);
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		panelMenu.add(lblTitulo);
 
-		Titulo t = new Titulo(lblTitulo);
+		Titulo t = new Titulo(lblTitulo, "M E D M A N ");
 		t.start();
 
 		// ------------------------------------------------------Botones------------------------------------------------------
@@ -137,12 +172,12 @@ public class Inicio extends JFrame {
 		// Play
 		int xBtnPlay = 162, yBtnPlay = 360;
 		int wBtnPlay = 200, hBtnPlay = 50;
-		JButton btnPlay = new JButton("Jugar");
+		btnPlay = new JButton("Jugar");
 		btnPlay.setBounds(xBtnPlay, yBtnPlay, wBtnPlay, hBtnPlay);
 		btnPlay.setFont(font_30);
-		btnPlay.setForeground(G);
+		btnPlay.setForeground(color);
 		btnPlay.setBackground(Color.BLACK);
-		btnPlay.setBorder(borderG);
+		btnPlay.setBorder(border);
 		btnPlay.setFocusPainted(false);
 		btnPlay.addMouseListener(new MouseListener() {
 
@@ -163,7 +198,7 @@ public class Inicio extends JFrame {
 				btnPlay.setLocation(xBtnPlay, yBtnPlay);
 				btnPlay.setSize(wBtnPlay, hBtnPlay);
 				btnPlay.setFont(font_30);
-				btnPlay.setForeground(G);
+				btnPlay.setForeground(color);
 				btnPlay.setBackground(Color.BLACK);
 			}
 
@@ -173,7 +208,7 @@ public class Inicio extends JFrame {
 				btnPlay.setSize(wBtnPlay + 20, hBtnPlay + 10);
 				btnPlay.setFont(font_35);
 				btnPlay.setForeground(Color.BLACK);
-				btnPlay.setBackground(G);
+				btnPlay.setBackground(color);
 			}
 
 			@Override
@@ -182,17 +217,26 @@ public class Inicio extends JFrame {
 
 			}
 		});
+		btnPlay.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Game1P g = new Game1P(frame,fondo, color, border, speed);
+				g.setVisible(true);
+				frame.setVisible(false);
+			}
+		});
 		panelMenu.add(btnPlay);
 
 		// Dificultad
 		int xBtnDificulty = 162, yBtnDificulty = 460;
 		int wBtnDificulty = 200, hBtnDificulty = 50;
-		JButton btnDificulty = new JButton("Dificultad");
+		btnDificulty = new JButton("Dificultad");
 		btnDificulty.setBounds(xBtnDificulty, yBtnDificulty, wBtnDificulty, hBtnDificulty);
 		btnDificulty.setFont(font_30);
-		btnDificulty.setForeground(G);
+		btnDificulty.setForeground(color);
 		btnDificulty.setBackground(Color.BLACK);
-		btnDificulty.setBorder(borderG);
+		btnDificulty.setBorder(border);
 		btnDificulty.setFocusPainted(false);
 		btnDificulty.addMouseListener(new MouseListener() {
 
@@ -213,7 +257,7 @@ public class Inicio extends JFrame {
 				btnDificulty.setLocation(xBtnDificulty, yBtnDificulty);
 				btnDificulty.setSize(wBtnDificulty, hBtnDificulty);
 				btnDificulty.setFont(font_30);
-				btnDificulty.setForeground(G);
+				btnDificulty.setForeground(color);
 				btnDificulty.setBackground(Color.BLACK);
 			}
 
@@ -223,7 +267,7 @@ public class Inicio extends JFrame {
 				btnDificulty.setSize(wBtnDificulty + 20, hBtnDificulty + 10);
 				btnDificulty.setFont(font_35);
 				btnDificulty.setForeground(Color.BLACK);
-				btnDificulty.setBackground(G);
+				btnDificulty.setBackground(color);
 			}
 
 			@Override
@@ -232,17 +276,26 @@ public class Inicio extends JFrame {
 
 			}
 		});
+		btnDificulty.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DDificulty d = new DDificulty(frame);
+				d.setModal(true);
+				d.setVisible(true);
+			}
+		});
 		panelMenu.add(btnDificulty);
 
 		// Salir
 		int xBtnExit = 162, yBtnExit = 560;
 		int wBtnExit = 200, hBtnExit = 50;
-		JButton btnExit = new JButton("Salir");
+		btnExit = new JButton("Salir");
 		btnExit.setBounds(xBtnExit, yBtnExit, wBtnExit, hBtnExit);
 		btnExit.setFont(font_30);
-		btnExit.setForeground(G);
+		btnExit.setForeground(color);
 		btnExit.setBackground(Color.BLACK);
-		btnExit.setBorder(borderG);
+		btnExit.setBorder(border);
 		btnExit.setFocusPainted(false);
 		btnExit.addMouseListener(new MouseListener() {
 
@@ -263,7 +316,7 @@ public class Inicio extends JFrame {
 				btnExit.setLocation(xBtnExit, yBtnExit);
 				btnExit.setSize(wBtnExit, hBtnExit);
 				btnExit.setFont(font_30);
-				btnExit.setForeground(G);
+				btnExit.setForeground(color);
 				btnExit.setBackground(Color.BLACK);
 			}
 
@@ -273,7 +326,7 @@ public class Inicio extends JFrame {
 				btnExit.setSize(wBtnExit + 20, hBtnExit + 10);
 				btnExit.setFont(font_35);
 				btnExit.setForeground(Color.BLACK);
-				btnExit.setBackground(G);
+				btnExit.setBackground(color);
 			}
 
 			@Override
@@ -283,51 +336,111 @@ public class Inicio extends JFrame {
 			}
 		});
 		btnExit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				endHilos();
 				dispose();
 			}
 		});
 		panelMenu.add(btnExit);
+	}
 
-//		JButton btnGreen = new JButton("Green");
-//		btnGreen.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				lblFondoG.setVisible(true);
-//				lblFondoR.setVisible(false);
-//				lblFondoB.setVisible(false);
-//				lblTitulo.setForeground(G);
-//			}
-//		});
-//		btnGreen.setBounds(228, 360, 89, 23);
-//		panelMenu.add(btnGreen);
-//		
-//		JButton btnRed = new JButton("Red");
-//		btnRed.setBounds(228, 407, 89, 23);
-//		btnRed.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				lblFondoR.setVisible(true);
-//				lblFondoG.setVisible(false);
-//				lblFondoB.setVisible(false);
-//				lblTitulo.setForeground(R);
-//			}
-//		});
-//		panelMenu.add(btnRed);
-//		
-//		JButton btnBlue = new JButton("Blue");
-//		btnBlue.setBounds(229, 451, 89, 23);
-//		btnBlue.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				lblFondoB.setVisible(true);
-//				lblFondoG.setVisible(false);
-//				lblFondoR.setVisible(false);
-//				lblTitulo.setForeground(B);
-//			}
-//		});
-//		panelMenu.add(btnBlue);
+	// ------------------------------------------------------Métodos------------------------------------------------------
 
-		// ------------------------------------------------------Métodos------------------------------------------------------
+	// Cambiar a facil
+	public void setEasy() {
+
+		// Fondos
+		lblFondoG.setVisible(false);
+		lblFondoR.setVisible(false);
+		lblFondoB.setVisible(true);
+		fondo = new ImageIcon(getClass().getResource("/Resources/fondoInicioB.gif"));
+
+		// Colores
+		color = B;
+		border = borderB;
+
+		// Titulo
+		lblTitulo.setForeground(color);
+		lblU.setForeground(color);
+		lblUser.setForeground(color);
 		
+
+		// Botones
+		btnPlay.setForeground(color);
+		btnPlay.setBorder(border);
+		btnDificulty.setForeground(color);
+		btnDificulty.setBorder(border);
+		btnExit.setForeground(color);
+		btnExit.setBorder(border);
+
+		// Velocidad
+		speed = 150;
+	}
+
+	// Cambiar a medio
+	public void setMedium() {
+
+		// Fondos
+		lblFondoG.setVisible(true);
+		lblFondoR.setVisible(false);
+		lblFondoB.setVisible(false);
+		fondo = new ImageIcon(getClass().getResource("/Resources/fondoInicio.gif"));
+
+		// Colores
+		color = G;
+		border = borderG;
+
+		// Titulo
+		lblTitulo.setForeground(color);
+		lblU.setForeground(color);
+		lblUser.setForeground(color);
+
+		// Botones
+		btnPlay.setForeground(color);
+		btnPlay.setBorder(border);
+		btnDificulty.setForeground(color);
+		btnDificulty.setBorder(border);
+		btnExit.setForeground(color);
+		btnExit.setBorder(border);
+
+		// Velocidad
+		speed = 100;
+	}
+
+	// Cambiar a dificil
+	public void setHard() {
+
+		// Fondos
+		lblFondoG.setVisible(false);
+		lblFondoR.setVisible(true);
+		lblFondoB.setVisible(false);
+		fondo = new ImageIcon(getClass().getResource("/Resources/fondoInicioR.gif"));
+
+		// Colores
+		color = R;
+		border = borderR;
+
+		// Titulo
+		lblTitulo.setForeground(color);
+		lblU.setForeground(color);
+		lblUser.setForeground(color);
+
+		// Botones
+		btnPlay.setForeground(color);
+		btnPlay.setBorder(border);
+		btnDificulty.setForeground(color);
+		btnDificulty.setBorder(border);
+		btnExit.setForeground(color);
+		btnExit.setBorder(border);
+
+		// Velocidad
+		speed = 50;
+	}
+	
+	public void endHilos() {
+		u.setFinish(true);
+		t.setFinish(true);
 	}
 }

@@ -16,6 +16,7 @@ public class Buffer extends Thread{
 	private Medman medman;
 	private Semaphore semaforoMedman = new Semaphore(1);
 	private int vidas;
+	private Timer timer;
 	
 	// Matriz del mapa
 	// 0 - Camino
@@ -36,7 +37,7 @@ public class Buffer extends Thread{
 			{ 1, 0, 0, 0, 0, /**/ 0, 0, 0, 1, 0, /**/ 0, 0, 0, 0, 0, /**/ 0, 0, 0, 0, 0, /**/ 0, 0, 0, 0, 0, /**/ 0, 0, 0, 0, 0, /**/ 0, 0, 1, 0, 0, /**/ 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, /**/ 0, 1, 0, 0, 0, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 0, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 1, /**/ 1, 1, 1, 1 },
 			{ 1, 1, 1, 1, 1, /**/ 0, 1, 1, 3, 1, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 0, 1, /**/ 1, 1, 1, 1 },
-			{ 1, 1, 1, 5, 0, /**/ 0, 1, 0, 1, 0, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 1, /**/ 1, 1, 1, 0, 0, /**/ 6, 1, 1, 1 },
+			{ 1, 1, 5, 0, 0, /**/ 0, 1, 0, 1, 0, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 1, /**/ 1, 1, 1, 0, 0, /**/ 0, 6, 1, 1 },
 			{ 1, 1, 1, 1, 1, /**/ 0, 1, 0, 0, 0, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 0, /**/ 1, 0, 1, 0, 0, /**/ 0, 0, 1, 0, 1, /**/ 1, 1, 1, 1 },
 			// ------------------------------------------------------------------------------------------------------------------------------
 			{ 1, 1, 1, 1, 1, /**/ 0, 1, 0, 1, 0, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 1, 1, /**/ 0, 0, 1, 0, 0, /**/ 1, 0, 1, 1, 1, /**/ 1, 0, 1, 0, 1, /**/ 1, 1, 1, 1 },
@@ -67,7 +68,6 @@ public class Buffer extends Thread{
 				}
 			} while (isValid == false);
 			
-			System.out.println(x+" | "+y);
 			tablero[x][y]=41+i;
 			xPremios[i]=x;
 			yPremios[i]=y;
@@ -105,16 +105,16 @@ public class Buffer extends Thread{
 
 		// Izquierda - Derecha
 		if (tablero[xTablero][yTablero - 1] == 5 && xDirection == -30) {
-			lblmedman.setLocation(1050, 240);
+			lblmedman.setLocation(1020, 240);
 			xTablero = 8;
-			yTablero = 35;
+			yTablero = 34;
 		}
 
 		// Derecha - Izquierda
 		if (tablero[xTablero][yTablero + 1] == 6 && xDirection == +30) {
-			lblmedman.setLocation(90, 240);
+			lblmedman.setLocation(120, 240);
 			xTablero = 8;
-			yTablero = 3;
+			yTablero = 4;
 		}
 		
 		semaforoMedman.acquire();
@@ -146,7 +146,7 @@ public class Buffer extends Thread{
 			// Le damos prioridad a continuar el la direccion que va para que intente
 			// avanzar
 			double continuar = Math.round(Math.random());
-			if (continuar>0.75) {
+			if (continuar>0.85) {
 				medgast.setDireccion((int) Math.round(Math.random()*4));
 				
 			}
@@ -183,6 +183,7 @@ public class Buffer extends Thread{
 				break;
 			}
 		}
+		
 		semaforoMedman.acquire();
 		if(medgast.getxTablero()==xTablero && medgast.getyTablero()==yTablero) {
 			morir();
@@ -213,11 +214,18 @@ public class Buffer extends Thread{
 		
 		//Comprobar vida
 		if (vidas==0) {
+			
+			//Medgast
 			game.endMegast21();
 			game.endMegast22();
 			game.endMegast23();
 			game.endMegast24();
 			medman.endMedman();
+			
+			//Hilos
+			game.endHilos();
+			
+			//Resto
 			morir();
 			sleep(1000);
 			game.losse();
@@ -240,6 +248,15 @@ public class Buffer extends Thread{
 		game.resetMegast22();
 		game.resetMegast23();
 		game.resetMegast24();
+		
+		
+		//Hilos
+		game.endHilos();
+		
+		//Puntos
+		double timePoints = 3000* (1/((double)timer.getS()+((double)timer.getM()*60)));
+		game.addPoints((300*vidas)+((int)timePoints));
+		
 	}
 	
 	// Coger el premio
@@ -252,31 +269,37 @@ public class Buffer extends Thread{
 					game.getPanel().remove(game.getLblPremio1());
 					tablero[xTablero][yTablero]=0;
 					contPremios++;
+					game.addPoints(1000);
 					break;
 				case 42:
 					game.getPanel().remove(game.getLblPremio2());
 					contPremios++;
 					tablero[xTablero][yTablero]=0;
+					game.addPoints(1000);
 					break;
 				case 43:
 					game.getPanel().remove(game.getLblPremio3());
 					contPremios++;
 					tablero[xTablero][yTablero]=0;
+					game.addPoints(1000);
 					break;
 				case 44:
 					game.getPanel().remove(game.getLblPremio4());
 					contPremios++;
 					tablero[xTablero][yTablero]=0;
+					game.addPoints(1000);
 					break;
 				case 45:
 					game.getPanel().remove(game.getLblPremio5());
 					contPremios++;
 					tablero[xTablero][yTablero]=0;
+					game.addPoints(1000);
 					break;
 				case 46:
 					game.getPanel().remove(game.getLblPremio6());
 					contPremios++;
 					tablero[xTablero][yTablero]=0;
+					game.addPoints(1000);
 					break;				
 				}
 				semaforoMedman.release();
@@ -336,6 +359,14 @@ public class Buffer extends Thread{
 
 	public void setMedman(Medman medman) {
 		this.medman = medman;
+	}
+
+	public Timer getTimer() {
+		return timer;
+	}
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
 	}
 	
 }

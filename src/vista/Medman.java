@@ -10,19 +10,20 @@ public class Medman extends Thread {
 
 	// Atributos
 	private Buffer buffer;
-	private boolean isPlaying;
+	private boolean isPlaying, finish;
 
 	// Constructores
 	public Medman(Buffer buffer) {
 		super();
 		this.buffer = buffer;
 		this.isPlaying = true;
+		this.finish = false;
 	}
 
 	// Métodos
 	@Override
 	public void run() {
-		while (isPlaying) {
+		while (isPlaying && finish==false) {
 			try {
 				sleep(200);
 				buffer.moverMedman();
@@ -51,5 +52,13 @@ public class Medman extends Thread {
 
 	public void setBuffer(Buffer buffer) {
 		this.buffer = buffer;
+	}
+	
+	public boolean isFinish() {
+		return finish;
+	}
+
+	public void setFinish(boolean finish) {
+		this.finish = finish;
 	}
 }

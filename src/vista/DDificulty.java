@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -20,6 +22,7 @@ public class DDificulty extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	private Inicio parent;
 
 	// Colores
 	private Color R = new Color(206, 0, 26);
@@ -41,7 +44,7 @@ public class DDificulty extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			DDificulty dialog = new DDificulty();
+			DDificulty dialog = new DDificulty(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -52,13 +55,14 @@ public class DDificulty extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DDificulty() {
+	public DDificulty(Inicio parent) {
+		this.parent = parent;
 
 		// ------------------------------------------------------Dialog------------------------------------------------------
 		setBounds(0, 0, 480, 580);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		// setUndecorated(true);
+		setUndecorated(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -123,6 +127,14 @@ public class DDificulty extends JDialog {
 
 			}
 		});
+		btnEasy.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.setEasy();
+				dispose();
+			}
+		});
 		contentPanel.add(btnEasy);
 
 		// Medium
@@ -173,12 +185,20 @@ public class DDificulty extends JDialog {
 
 			}
 		});
+		btnMedium.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.setMedium();
+				dispose();
+			}
+		});
 		contentPanel.add(btnMedium);
 
 		// Hard
 		int xBtnHard = 142, yBtnHard = 400;
 		int wBtnHard = 200, hBtnHard = 50;
-		JButton btnHard = new JButton("Jugar");
+		JButton btnHard = new JButton("Dificil");
 		btnHard.setBounds(xBtnHard, yBtnHard, wBtnHard, hBtnHard);
 		btnHard.setFont(font_30);
 		btnHard.setForeground(R);
@@ -221,6 +241,14 @@ public class DDificulty extends JDialog {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
+			}
+		});
+		btnHard.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.setHard();
+				dispose();
 			}
 		});
 		contentPanel.add(btnHard);

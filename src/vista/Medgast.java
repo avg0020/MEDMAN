@@ -9,7 +9,9 @@ public class Medgast extends Thread {
 	private JLabel lbl;
 	private boolean isFirstTurn;
 	private boolean isPlaying;
-
+	private boolean finish;
+	private int speed;
+	
 	// Constructores
 	public Medgast(Buffer buffer, JLabel lbl, int type) {
 		super();
@@ -18,17 +20,18 @@ public class Medgast extends Thread {
 		this.type = type;
 		this.isFirstTurn = true;
 		this.isPlaying = true;
+		this.finish = false;
 	}
 	
 	// Métodos
 	@Override
 	public void run() {
-		while (isPlaying) {
+		while (isPlaying && finish==false) {
 			try {
 				if (isFirstTurn) {
 					movimientoSalida();
 				}
-				sleep(200);
+				sleep(speed);
 				buffer.moverMedgast(this);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -93,15 +96,31 @@ public class Medgast extends Thread {
 		this.isPlaying = isPlaying;
 	}
 
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	
+	public boolean isFinish() {
+		return finish;
+	}
+
+	public void setFinish(boolean finish) {
+		this.finish = finish;
+	}
+
 	public void movimientoSalida() {
 		try {
 			switch (type) {
 			case 21:
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(570, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(600, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(630, 240);
 				this.xTablero=8;
 				this.yTablero=21;
@@ -110,11 +129,11 @@ public class Medgast extends Thread {
 			case 22:
 				sleep(600);
 				lbl.setLocation(540, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(570, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(600, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(630, 240);
 				this.xTablero=8;
 				this.yTablero=21;
@@ -123,9 +142,9 @@ public class Medgast extends Thread {
 			case 23:
 				sleep(1000);
 				lbl.setLocation(570, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(600, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(630, 240);
 				this.xTablero=8;
 				this.yTablero=21;
@@ -134,11 +153,11 @@ public class Medgast extends Thread {
 			case 24:
 				sleep(1600);
 				lbl.setLocation(540, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(570, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(600, 240);
-				sleep(200);
+				sleep(speed);
 				lbl.setLocation(630, 240);
 				this.xTablero=8;
 				this.yTablero=21;
