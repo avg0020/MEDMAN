@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.awt.desktop.ScreenSleepEvent;
 
 import javax.swing.ImageIcon;
@@ -33,6 +34,7 @@ public class Load extends JFrame implements Runnable{
 	 * Create the frame.
 	 */
 	public Load() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/medac.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 500, 304);
 		setLocationRelativeTo(null);

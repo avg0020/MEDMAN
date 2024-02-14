@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Game1P extends JFrame implements KeyListener {
 
@@ -141,6 +142,7 @@ public class Game1P extends JFrame implements KeyListener {
 		medgast24.setSpeed(speed);
 
 		// Frame
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/medac.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1186, 900);
 		contentPane = new JPanel() {
